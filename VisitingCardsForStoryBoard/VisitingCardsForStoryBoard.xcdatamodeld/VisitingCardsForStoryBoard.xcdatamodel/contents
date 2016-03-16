@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Contact" representedClassName="Contact" syncable="YES">
+        <attribute name="categoryContactList" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddressCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddressCountry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddressNumberHouse" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddressNumberOffice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddresStreet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiAddressURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companiName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyTelephone1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyTelephone2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyTelephoneFax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactNotes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactPosition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactPrivateURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactTelephone1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactTelephone2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactTelephone3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateOfCreationContact" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="emailPrivate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emailWork" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="kardPhotoBack" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="kardPhotoFront" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="skype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="surName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Contact" positionX="-63" positionY="-18" width="128" height="448"/>
+    </elements>
+</model>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UbJ-gX-QFt">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings-->
+        <scene sceneID="EhP-c6-GSx">
+            <objects>
+                <viewController id="nlS-5P-i2v" customClass="SetingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jKd-6J-xco"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Lh-lR-gha"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EXs-w9-AcF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.73720189144736847" green="0.94096936677631504" blue="0.87173622532894723" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="1" title="Settings" image="Settings-50.png" id="SKC-Z4-g41"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssO-5A-YNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="227" y="1216"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="SIp-ue-wkR">
+            <objects>
+                <viewController id="PO5-R5-bh6" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YLQ-4v-k3J"/>
+                        <viewControllerLayoutGuide type="bottom" id="yqb-Oj-qay"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hmu-iV-w93">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.98275596217105265" green="0.90660978618421051" blue="0.66645250822368418" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="2" title="Camera" image="Camera-50.png" id="aI8-tc-KLn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfS-O8-hUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218" y="507"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="atk-d3-EJv">
+            <objects>
+                <viewController id="IW0-oo-5fN" customClass="ContactsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MId-Kq-8bE"/>
+                        <viewControllerLayoutGuide type="bottom" id="ybL-OC-X1d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nKH-x6-Joo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XMN-Pl-YQI">
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="BOv-XB-mxd">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <color key="tintColor" red="0.0" green="0.017166940790000002" blue="0.34372430100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ulb-Yk-1GY">
+                                <rect key="frame" x="16" y="72" width="568" height="29"/>
+                                <segments>
+                                    <segment title="Name"/>
+                                    <segment title="Last Name"/>
+                                    <segment title="Company"/>
+                                    <segment title="Date of Creation"/>
+                                </segments>
+                                <color key="tintColor" red="0.0" green="0.017166940790000002" blue="0.34372430100000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.52819181743421051" green="0.87448601973684215" blue="0.89113898026315785" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="XMN-Pl-YQI" firstAttribute="leading" secondItem="BOv-XB-mxd" secondAttribute="leading" id="5ol-LJ-GMp"/>
+                            <constraint firstItem="BOv-XB-mxd" firstAttribute="top" secondItem="MId-Kq-8bE" secondAttribute="bottom" constant="8" id="6ve-xT-IsV"/>
+                            <constraint firstItem="XMN-Pl-YQI" firstAttribute="top" secondItem="ulb-Yk-1GY" secondAttribute="bottom" constant="8" symbolic="YES" id="8lt-5R-6fw"/>
+                            <constraint firstItem="ulb-Yk-1GY" firstAttribute="leading" secondItem="nKH-x6-Joo" secondAttribute="leadingMargin" id="ApK-3U-n5Z"/>
+                            <constraint firstItem="ulb-Yk-1GY" firstAttribute="centerX" secondItem="BOv-XB-mxd" secondAttribute="centerX" id="E2J-7L-fbx"/>
+                            <constraint firstItem="BOv-XB-mxd" firstAttribute="leading" secondItem="nKH-x6-Joo" secondAttribute="leading" id="hnZ-Zq-dvB"/>
+                            <constraint firstItem="XMN-Pl-YQI" firstAttribute="bottom" secondItem="ybL-OC-X1d" secondAttribute="top" id="iSJ-YP-hcX"/>
+                            <constraint firstItem="ulb-Yk-1GY" firstAttribute="top" secondItem="BOv-XB-mxd" secondAttribute="bottom" id="uIr-NO-iFI"/>
+                            <constraint firstItem="BOv-XB-mxd" firstAttribute="trailing" secondItem="XMN-Pl-YQI" secondAttribute="trailing" id="wC8-V7-uJE"/>
+                            <constraint firstAttribute="trailing" secondItem="BOv-XB-mxd" secondAttribute="trailing" id="xT5-2x-pLV"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="3" title="Contacts" image="Contact Card-50.png" id="s54-S2-eyX"/>
+                    <connections>
+                        <outlet property="contactSegment" destination="ulb-Yk-1GY" id="Bko-eO-zyf"/>
+                        <outlet property="contactsTableView" destination="XMN-Pl-YQI" id="UgM-Rp-fk2"/>
+                        <outlet property="serchContactBar" destination="BOv-XB-mxd" id="yGZ-mH-QGS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dkt-HB-Asx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218" y="-155"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="uDf-jW-ia7">
+            <objects>
+                <tabBarController id="UbJ-gX-QFt" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" alpha="0.69999999999999973" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="49" id="gjC-Pg-MGB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="IW0-oo-5fN" kind="relationship" relationship="viewControllers" id="ghZ-4B-bz4"/>
+                        <segue destination="PO5-R5-bh6" kind="relationship" relationship="viewControllers" id="TSt-cw-pEf"/>
+                        <segue destination="nlS-5P-i2v" kind="relationship" relationship="viewControllers" id="vin-kC-uKB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i00-HD-vfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-529" y="507"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Camera-50.png" width="42" height="42"/>
+        <image name="Contact Card-50.png" width="42" height="42"/>
+        <image name="Settings-50.png" width="42" height="42"/>
+    </resources>
+</document>
