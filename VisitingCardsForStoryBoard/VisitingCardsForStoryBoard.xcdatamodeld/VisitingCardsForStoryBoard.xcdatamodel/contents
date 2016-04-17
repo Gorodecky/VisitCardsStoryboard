@@ -2,13 +2,13 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="categoryContactList" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddressCity" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddressCountry" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddressNumberHouse" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddressNumberOffice" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddresStreet" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiAddressURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companiName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddressCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddressCountry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddressNumberHouse" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddressNumberOffice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddresStreet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyAddressURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyTelephone1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyTelephone2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyTelephoneFax" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,6 +30,6 @@
         <attribute name="surName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Contact" positionX="-63" positionY="-18" width="128" height="448"/>
+        <element name="Contact" positionX="-63" positionY="-18" width="128" height="450"/>
     </elements>
 </model>

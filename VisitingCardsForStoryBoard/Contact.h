@@ -9,17 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
-@interface Contact : NSManagedObject
+@interface Contact :  NSManagedObject
 
 @property (nonatomic, retain) NSString * categoryContactList;
-@property (nonatomic, retain) NSString * companiAddressCity;
-@property (nonatomic, retain) NSString * companiAddressCountry;
-@property (nonatomic, retain) NSString * companiAddressNumberHouse;
-@property (nonatomic, retain) NSString * companiAddressNumberOffice;
-@property (nonatomic, retain) NSString * companiAddresStreet;
-@property (nonatomic, retain) NSString * companiAddressURL;
-@property (nonatomic, retain) NSString * companiName;
+@property (nonatomic, retain) NSString * companyAddressCity;
+@property (nonatomic, retain) NSString * companyAddressCountry;
+@property (nonatomic, retain) NSString * companyAddressNumberHouse;
+@property (nonatomic, retain) NSString * companyAddressNumberOffice;
+@property (nonatomic, retain) NSString * companyAddresStreet;
+@property (nonatomic, retain) NSString * companyAddressURL;
+@property (nonatomic, retain) NSString * companyName;
 @property (nonatomic, retain) NSString * companyTelephone1;
 @property (nonatomic, retain) NSString * companyTelephone2;
 @property (nonatomic, retain) NSString * companyTelephoneFax;

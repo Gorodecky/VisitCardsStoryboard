@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D50634111CB7F3C900008358 /* ContactCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D50634101CB7F3C900008358 /* ContactCustomTableViewCell.m */; };
 		D509A9EF1C9947E50068624D /* SetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D509A9EE1C9947E50068624D /* SetingsViewController.m */; };
 		D509A9F21C9947FB0068624D /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D509A9F11C9947FB0068624D /* CameraViewController.m */; };
 		D509A9F51C9948220068624D /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D509A9F41C9948220068624D /* ContactsViewController.m */; };
+		D5DCB3A01CB2F1E500B89EB4 /* CreateContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCB39F1CB2F1E500B89EB4 /* CreateContactViewController.m */; };
 		D5F9FA7D1C96F0E400A0760F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F9FA7C1C96F0E400A0760F /* main.m */; };
 		D5F9FA801C96F0E400A0760F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F9FA7F1C96F0E400A0760F /* AppDelegate.m */; };
 		D5F9FA831C96F0E400A0760F /* VisitingCardsForStoryBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D5F9FA811C96F0E400A0760F /* VisitingCardsForStoryBoard.xcdatamodeld */; };
@@ -38,12 +40,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D506340F1CB7F3C900008358 /* ContactCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCustomTableViewCell.h; sourceTree = "<group>"; };
+		D50634101CB7F3C900008358 /* ContactCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCustomTableViewCell.m; sourceTree = "<group>"; };
 		D509A9ED1C9947E50068624D /* SetingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetingsViewController.h; sourceTree = "<group>"; };
 		D509A9EE1C9947E50068624D /* SetingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetingsViewController.m; sourceTree = "<group>"; };
 		D509A9F01C9947FB0068624D /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		D509A9F11C9947FB0068624D /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		D509A9F31C9948220068624D /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		D509A9F41C9948220068624D /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		D5DCB39E1CB2F1E500B89EB4 /* CreateContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateContactViewController.h; sourceTree = "<group>"; };
+		D5DCB39F1CB2F1E500B89EB4 /* CreateContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateContactViewController.m; sourceTree = "<group>"; };
 		D5F9FA771C96F0E400A0760F /* VisitingCardsForStoryBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisitingCardsForStoryBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F9FA7B1C96F0E400A0760F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5F9FA7C1C96F0E400A0760F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -86,6 +92,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D509A9F61C997BD60068624D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D509A9F31C9948220068624D /* ContactsViewController.h */,
+				D509A9F41C9948220068624D /* ContactsViewController.m */,
+				D509A9F01C9947FB0068624D /* CameraViewController.h */,
+				D509A9F11C9947FB0068624D /* CameraViewController.m */,
+				D509A9ED1C9947E50068624D /* SetingsViewController.h */,
+				D509A9EE1C9947E50068624D /* SetingsViewController.m */,
+				D5DCB39E1CB2F1E500B89EB4 /* CreateContactViewController.h */,
+				D5DCB39F1CB2F1E500B89EB4 /* CreateContactViewController.m */,
+				D506340F1CB7F3C900008358 /* ContactCustomTableViewCell.h */,
+				D50634101CB7F3C900008358 /* ContactCustomTableViewCell.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		D509A9F71C99AAE90068624D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D5F9FABE1C975E1200A0760F /* Contact.h */,
+				D5F9FABF1C975E1200A0760F /* Contact.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D5F9FA6E1C96F0E400A0760F = {
 			isa = PBXGroup;
 			children = (
@@ -107,23 +139,17 @@
 		D5F9FA791C96F0E400A0760F /* VisitingCardsForStoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				D5F9FAA31C96F90E00A0760F /* Images */,
+				D509A9F71C99AAE90068624D /* Models */,
+				D509A9F61C997BD60068624D /* UI */,
 				D5F9FA7E1C96F0E400A0760F /* AppDelegate.h */,
-				D509A9F01C9947FB0068624D /* CameraViewController.h */,
-				D509A9F31C9948220068624D /* ContactsViewController.h */,
-				D509A9F41C9948220068624D /* ContactsViewController.m */,
-				D509A9F11C9947FB0068624D /* CameraViewController.m */,
-				D509A9ED1C9947E50068624D /* SetingsViewController.h */,
-				D509A9EE1C9947E50068624D /* SetingsViewController.m */,
 				D5F9FA7F1C96F0E400A0760F /* AppDelegate.m */,
 				D5F9FA841C96F0E400A0760F /* ViewController.h */,
 				D5F9FA851C96F0E400A0760F /* ViewController.m */,
 				D5F9FA871C96F0E400A0760F /* Main.storyboard */,
-				D5F9FABE1C975E1200A0760F /* Contact.h */,
-				D5F9FABF1C975E1200A0760F /* Contact.m */,
 				D5F9FA8A1C96F0E400A0760F /* Images.xcassets */,
 				D5F9FA8C1C96F0E400A0760F /* LaunchScreen.xib */,
 				D5F9FA811C96F0E400A0760F /* VisitingCardsForStoryBoard.xcdatamodeld */,
+				D5F9FAA31C96F90E00A0760F /* Images */,
 				D5F9FA7A1C96F0E400A0760F /* Supporting Files */,
 			);
 			path = VisitingCardsForStoryBoard;
@@ -274,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5DCB3A01CB2F1E500B89EB4 /* CreateContactViewController.m in Sources */,
 				D5F9FA801C96F0E400A0760F /* AppDelegate.m in Sources */,
 				D509A9F51C9948220068624D /* ContactsViewController.m in Sources */,
 				D5F9FA831C96F0E400A0760F /* VisitingCardsForStoryBoard.xcdatamodeld in Sources */,
@@ -282,6 +309,7 @@
 				D5F9FA861C96F0E400A0760F /* ViewController.m in Sources */,
 				D509A9F21C9947FB0068624D /* CameraViewController.m in Sources */,
 				D5F9FA7D1C96F0E400A0760F /* main.m in Sources */,
+				D50634111CB7F3C900008358 /* ContactCustomTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

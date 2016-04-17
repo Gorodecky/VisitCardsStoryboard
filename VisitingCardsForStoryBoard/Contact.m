@@ -11,14 +11,15 @@
 
 @implementation Contact
 
+
 @dynamic categoryContactList;
-@dynamic companiAddressCity;
-@dynamic companiAddressCountry;
-@dynamic companiAddressNumberHouse;
-@dynamic companiAddressNumberOffice;
-@dynamic companiAddresStreet;
-@dynamic companiAddressURL;
-@dynamic companiName;
+@dynamic companyAddressCity;
+@dynamic companyAddressCountry;
+@dynamic companyAddressNumberHouse;
+@dynamic companyAddressNumberOffice;
+@dynamic companyAddresStreet;
+@dynamic companyAddressURL;
+@dynamic companyName;
 @dynamic companyTelephone1;
 @dynamic companyTelephone2;
 @dynamic companyTelephoneFax;
@@ -38,5 +39,6 @@
 @dynamic name;
 @dynamic skype;
 @dynamic surName;
+
 
 @end
