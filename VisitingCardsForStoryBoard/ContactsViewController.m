@@ -161,10 +161,9 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     NSManagedObjectContext* context = [self managedObjectContext];
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete && self.serchContactBar.text.length == 0)  {
         
         [context deleteObject:[self.groupsArray objectAtIndex:indexPath.row]];
         
@@ -178,6 +177,21 @@ typedef enum {
         [self.groupsArray removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        
+        [context deleteObject:[self.searchResults objectAtIndex:indexPath.row]];
+        
+        NSError *error = nil;
+        
+        if (![context save:&error]) {
+            NSLog(@"Delete error! %@, %@", error, [error localizedDescription]);
+            return;
+        }
+        
+        [self.searchResults removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+        
     }
     
 }
@@ -196,7 +210,6 @@ typedef enum {
     [self.serchContactBar setShowsCancelButton:NO animated:YES];
 }
 
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {   // called when text changes (including clear)
     [self filterContentForSearchText:searchText];
     
@@ -208,33 +221,32 @@ typedef enum {
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
+                                              inManagedObjectContext:self.managedObjectContext];
     
     [fetchRequest setEntity:entity];
     
-    if (self.searchResults != nil) {
-        [self.searchResults removeAllObjects];
-    }
+    NSPredicate* predicateForName =        [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@",
+                                            searchText];
+    NSPredicate* predicateForLastName =    [NSPredicate predicateWithFormat:@"lastName CONTAINS[c] %@",
+                                            searchText];
+    NSPredicate* predicateForCompanyName = [NSPredicate predicateWithFormat:@"companyName CONTAINS[C] %@",
+                                            searchText];
     
-    NSArray *fields = @[@"name", @"lastName"];
+    NSPredicate* generalPredicate = [NSCompoundPredicate
+                                     orPredicateWithSubpredicates:@[predicateForName,
+                                                                    predicateForLastName,
+                                                                    predicateForCompanyName]];
     
-    NSMutableArray *predicates = [NSMutableArray array];
-    
-    for (NSString *field in fields) {
-        
-        [predicates addObject:[NSPredicate predicateWithFormat:@"%@ contains[cd] %@", field, searchText]];
-    }
-    
-    NSPredicate *search = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+    [fetchRequest setPredicate:generalPredicate];
     
     NSError *error;
     
-    fetchRequest.predicate = search;
+    NSArray* result = [[self managedObjectContext] executeFetchRequest:fetchRequest
+                                                                 error:&error];
     
-    self.searchResults = [NSMutableArray arrayWithArray:[[self managedObjectContext] executeFetchRequest:fetchRequest error:&error]];
-    
+    self.searchResults = [result mutableCopy];
 }
 
 #pragma mark - UITableViewDataSource
@@ -278,7 +290,6 @@ typedef enum {
         return self.searchResults.count;
         
     }
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -305,8 +316,8 @@ typedef enum {
         
     }
     
-    [customCell.firstNameLable setText:[NSString stringWithFormat:@"%@",[contact valueForKey:@"name"]]];
-    [customCell.lastNameLable setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"lastName"]]];
+    [customCell.firstNameLable   setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"name"]]];
+    [customCell.lastNameLable    setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"lastName"]]];
     [customCell.companyNameLable setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"companyName"]]];
     
     return customCell;
