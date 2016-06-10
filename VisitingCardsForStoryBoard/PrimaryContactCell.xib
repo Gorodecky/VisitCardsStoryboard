@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="primaryContactCellIdentifier" rowHeight="163" id="KGk-i7-Jjw" customClass="PrimaryContactCell">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="163"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pLp-Fp-wpg">
+                        <rect key="frame" x="8" y="46" width="326" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-b8-toy">
+                        <rect key="frame" x="8" y="79" width="326" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fty-fw-jLN">
+                        <rect key="frame" x="8" y="124" width="326" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="KQ8-29-rUc">
+                        <rect key="frame" x="8" y="8" width="326" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="top" secondItem="2dD-b8-toy" secondAttribute="bottom" constant="15" id="40A-R4-0hz"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="7VZ-9E-RXx"/>
+                    <constraint firstItem="pLp-Fp-wpg" firstAttribute="top" secondItem="KQ8-29-rUc" secondAttribute="bottom" constant="8" id="7Z2-z3-lG2"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="top" secondItem="2dD-b8-toy" secondAttribute="bottom" constant="15" id="8O6-YV-sga"/>
+                    <constraint firstItem="KQ8-29-rUc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9Lo-cc-4mA"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Ast-5K-DHk"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="top" secondItem="2dD-b8-toy" secondAttribute="bottom" constant="8" id="Efs-hB-Uxm"/>
+                    <constraint firstItem="pLp-Fp-wpg" firstAttribute="top" secondItem="KQ8-29-rUc" secondAttribute="bottom" constant="8" id="Eo4-pk-B6f"/>
+                    <constraint firstItem="pLp-Fp-wpg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="FJL-gh-iID"/>
+                    <constraint firstItem="2dD-b8-toy" firstAttribute="top" secondItem="pLp-Fp-wpg" secondAttribute="bottom" constant="8" id="HsC-wa-gLO"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="HzP-Hn-kEX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2dD-b8-toy" secondAttribute="trailing" constant="-2" id="JbF-gy-XvE"/>
+                    <constraint firstItem="2dD-b8-toy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LeG-cz-qeo"/>
+                    <constraint firstItem="2dD-b8-toy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Li8-zm-HNt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pLp-Fp-wpg" secondAttribute="trailing" constant="-2" id="PLM-ry-3xb"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="PnH-Si-fPl"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="fty-fw-jLN" secondAttribute="bottom" constant="7" id="SYw-G3-lQQ"/>
+                    <constraint firstItem="KQ8-29-rUc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="U2f-MJ-2Ez"/>
+                    <constraint firstItem="2dD-b8-toy" firstAttribute="top" secondItem="pLp-Fp-wpg" secondAttribute="bottom" constant="8" id="cic-8F-G3H"/>
+                    <constraint firstItem="fty-fw-jLN" firstAttribute="trailing" secondItem="KQ8-29-rUc" secondAttribute="trailing" id="j9x-u0-je1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fty-fw-jLN" secondAttribute="trailing" constant="-2" id="nRg-9r-OYh"/>
+                    <constraint firstItem="pLp-Fp-wpg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="tnu-BA-vJy"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8O6-YV-sga"/>
+                        <exclude reference="Efs-hB-Uxm"/>
+                        <exclude reference="HzP-Hn-kEX"/>
+                        <exclude reference="SYw-G3-lQQ"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="companyNameTextField" destination="2dD-b8-toy" id="0ND-ag-P1z"/>
+                <outlet property="lastNameTextField" destination="pLp-Fp-wpg" id="WVo-Li-ilX"/>
+                <outlet property="nameTextField" destination="KQ8-29-rUc" id="jss-fT-iCo"/>
+                <outlet property="phoneTextField" destination="fty-fw-jLN" id="q0F-UJ-g3g"/>
+            </connections>
+            <point key="canvasLocation" x="-10" y="187.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Contact.h"
 
 @interface CreateContactViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
-@property (strong, nonatomic) NSManagedObject *contact;
-
+@property (strong, nonatomic) Contact *contact;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)saveButton:(id)sender;
 

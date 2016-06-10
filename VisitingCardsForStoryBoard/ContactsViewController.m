@@ -11,6 +11,7 @@
 #import "CreateContactViewController.h"
 #import "ContactCustomTableViewCell.h"
 #import "Section.h"
+#import "Utilite.h"
 
 
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -40,6 +41,7 @@ typedef enum {
     self.serchContactBar.delegate = self;
     
     self.contactSegment.selectedSegmentIndex = sortSegmentName;
+    
     
 }
 
@@ -121,7 +123,7 @@ typedef enum {
 
 - (void) sortContactsArray: (NSString*) sortString {
     
-    NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext* managedObjectContext = [Utilite managedObjectContext];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]
                                     initWithEntityName:@"Contact"];
@@ -139,20 +141,6 @@ typedef enum {
     //self.groupsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 }
 
-# pragma mark - NSManagedObjectContext
-
-- (NSManagedObjectContext*) managedObjectContext {
-    
-    NSManagedObjectContext* context = nil;
-    
-    id delegate = [[UIApplication sharedApplication] delegate];
-    
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 #pragma mark UITableViewDelegate
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -161,7 +149,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSManagedObjectContext* context = [self managedObjectContext];
+    NSManagedObjectContext* context = [Utilite managedObjectContext];
     
     if (editingStyle == UITableViewCellEditingStyleDelete && self.serchContactBar.text.length == 0)  {
         
@@ -216,6 +204,7 @@ typedef enum {
     [self.tableView reloadData];
     
 }
+
 #pragma  mark - SearchBar
 
 - (void)filterContentForSearchText:(NSString*)searchText
@@ -223,7 +212,7 @@ typedef enum {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
-                                              inManagedObjectContext:self.managedObjectContext];
+                                              inManagedObjectContext:[Utilite managedObjectContext]];
     
     [fetchRequest setEntity:entity];
     
@@ -243,41 +232,14 @@ typedef enum {
     
     NSError *error;
     
-    NSArray* result = [[self managedObjectContext] executeFetchRequest:fetchRequest
+    NSArray* result = [[Utilite managedObjectContext] executeFetchRequest:fetchRequest
                                                                  error:&error];
     
     self.searchResults = [result mutableCopy];
 }
 
 #pragma mark - UITableViewDataSource
-/*
- 
- - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
- // return list of section titles to display in section index view (e.g. "ABCD...Z#")
- 
- 
- 
- }
- 
- - (NSArray*) sectionIndexTitlesForTableView:(UITableView *)tableView {
- 
- NSMutableArray* array = [NSMutableArray array];
- for (Section* section in self.sectionsArray) {
- [array addObject:section.sectionName];
- }
- return array;
- }
- */
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
- 
- return [self.sectionsArray count];
- 
- }
- 
- - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
- return [[self.sectionsArray objectAtIndex:section] sectionName];
- }
- */
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
