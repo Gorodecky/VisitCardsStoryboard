@@ -14,8 +14,13 @@
 
 @property (nonatomic, strong) Contact *contact;
 
-- (void) updateUI;
 
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+
+- (void) updateUI;
 
 @end
 

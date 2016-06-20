@@ -11,7 +11,6 @@
 
 @interface Utilite : NSObject
 
-
 + (NSManagedObjectContext*) managedObjectContext;
 
 @end

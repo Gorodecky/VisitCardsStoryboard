@@ -21,18 +21,6 @@
                             <constraint firstAttribute="width" constant="180" id="tov-rA-pxh"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhx-S8-wM0">
-                        <rect key="frame" x="75" y="43" width="46" height="30"/>
-                        <state key="normal" title="Button">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uX1-m4-vKm">
-                        <rect key="frame" x="262" y="43" width="46" height="30"/>
-                        <state key="normal" title="Button">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Z-Ge-oL1">
                         <rect key="frame" x="8" y="8" width="180" height="100"/>
                         <constraints>
@@ -40,6 +28,24 @@
                             <constraint firstAttribute="width" constant="180" id="rCZ-67-hRC"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhx-S8-wM0">
+                        <rect key="frame" x="75" y="43" width="46" height="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="touchButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hDn-EC-SOb"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uX1-m4-vKm">
+                        <rect key="frame" x="262" y="43" width="46" height="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="touchButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Tze-b2-vdh"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Y6Z-Ge-oL1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="FsW-Zm-zwD"/>
@@ -52,6 +58,7 @@
                 <outlet property="ReversImageButton" destination="uX1-m4-vKm" id="idj-jc-3gB"/>
                 <outlet property="aversImageButton" destination="Zhx-S8-wM0" id="R89-W1-Emq"/>
                 <outlet property="aversImagesVisitingCard" destination="Y6Z-Ge-oL1" id="2Va-9T-pAg"/>
+                <outlet property="reversImageButton" destination="uX1-m4-vKm" id="dF5-Oe-nqp"/>
                 <outlet property="reversImagesVisitingCard" destination="JnU-Rl-YOh" id="x4k-9V-fHI"/>
             </connections>
             <point key="canvasLocation" x="253.5" y="85.5"/>

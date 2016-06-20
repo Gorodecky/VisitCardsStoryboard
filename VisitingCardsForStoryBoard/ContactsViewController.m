@@ -33,7 +33,6 @@ typedef enum {
 
 @implementation ContactsViewController
 
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -41,8 +40,6 @@ typedef enum {
     self.serchContactBar.delegate = self;
     
     self.contactSegment.selectedSegmentIndex = sortSegmentName;
-    
-    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -118,7 +115,6 @@ typedef enum {
         NSString* sortString = @"dateOfCreationContact";
         [self sortContactsArray:sortString];
     }
-    
 }
 
 - (void) sortContactsArray: (NSString*) sortString {
@@ -144,6 +140,7 @@ typedef enum {
 #pragma mark UITableViewDelegate
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     return YES; // функция разрешает выделять ячейки в таблице
 }
 
@@ -181,7 +178,6 @@ typedef enum {
                               withRowAnimation:UITableViewRowAnimationFade];
         
     }
-    
 }
 
 #pragma mark - UISearchBarDelegate
@@ -199,6 +195,7 @@ typedef enum {
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {   // called when text changes (including clear)
+    
     [self filterContentForSearchText:searchText];
     
     [self.tableView reloadData];
@@ -233,7 +230,7 @@ typedef enum {
     NSError *error;
     
     NSArray* result = [[Utilite managedObjectContext] executeFetchRequest:fetchRequest
-                                                                 error:&error];
+                                                                    error:&error];
     
     self.searchResults = [result mutableCopy];
 }

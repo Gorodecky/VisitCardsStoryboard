@@ -11,10 +11,6 @@
 
 @interface PrimaryContactCell () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end
 
@@ -22,6 +18,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _nameTextField.delegate =
+    _lastNameTextField.delegate =
+    _companyNameTextField.delegate =
+    _phoneTextField.delegate = self;
     
     [_nameTextField addTarget:self
                        action:@selector(textFieldDidChange:)
@@ -34,17 +34,20 @@
     [_companyNameTextField addTarget:self
                               action:@selector(textFieldDidChange:)
                     forControlEvents:UIControlEventEditingChanged];
+    [_phoneTextField addTarget:self
+                        action:@selector(textFieldDidChange:)
+              forControlEvents:UIControlEventEditingChanged];
     
-    _nameTextField.tag = 1000;
-    _lastNameTextField.tag = 1001;
+    _nameTextField.tag        = 1000;
+    _lastNameTextField.tag    = 1001;
     _companyNameTextField.tag = 1002;
+    _phoneTextField.tag       = 1003;
     
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 - (void)updateUI {
@@ -52,18 +55,14 @@
     self.nameTextField.text = self.contact.name;
     self.lastNameTextField.text = self.contact.lastName;
     self.companyNameTextField.text = self.contact.companyName;
+    self.phoneTextField.text = self.contact.contactTelephone1;
         
 }
 
-
 -(void)textFieldDidChange :(UITextField *)theTextField{
     
-    NSLog( @"text changed: %@", theTextField.text);
-    
     if (theTextField.tag == 1000) {
-
         self.contact.name = theTextField.text;
-        
     }
     
     if (theTextField.tag == 1001) {
@@ -74,6 +73,24 @@
         self.contact.companyName = theTextField.text;
     }
     
+    if (theTextField.tag == 1003) {
+        self.contact.contactTelephone1 = theTextField.text;
+    }
+    
+}
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    //[self.view endEditing:YES];
+    
+    [_nameTextField resignFirstResponder];
+    [_lastNameTextField resignFirstResponder];
+    [_companyNameTextField resignFirstResponder];
+    [_phoneTextField resignFirstResponder];
+    
+    
+
+    return NO;
 }
 
 
