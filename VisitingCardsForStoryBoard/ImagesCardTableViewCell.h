@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@protocol AversImageButtonDelegate <NSObject>
+@protocol ImageButtonDelegate <NSObject>
 
 - (void) imagesCartTableViewCell:(int)tag;
 
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *aversImageButton;
 @property (weak, nonatomic) IBOutlet UIButton *reversImageButton;
 
-@property (weak, nonatomic) id <AversImageButtonDelegate> delegate;
+@property (weak, nonatomic) id <ImageButtonDelegate> delegate;
 
 - (IBAction)touchButton:(id)sender;
 

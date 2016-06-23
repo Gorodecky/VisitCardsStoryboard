@@ -27,7 +27,7 @@ typedef enum {
                                            UITableViewDelegate,
                                            UIActionSheetDelegate,
                                            UITextFieldDelegate,
-                                           AversImageButtonDelegate,
+                                           ImageButtonDelegate,
                                            UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     
     StatusViewType screenType;
@@ -61,13 +61,13 @@ typedef enum {
                                 bundle:nil];
     [[self tableView] registerNib:nibImageCardCell
            forCellReuseIdentifier:imageCardCellIdentifier];
-    
+    //////////
     UINib * nibPrimaryConactCell = [UINib
                                     nibWithNibName:@"PrimaryContactCell"
                                     bundle:nil];
     [[self tableView] registerNib:nibPrimaryConactCell
            forCellReuseIdentifier:primaryContactCellIdentifier];
-    
+    /////////////
     UINib * nibSecondaryContactCell = [UINib
                                        nibWithNibName:@"SecondaryContactCell"
                                        bundle:nil];
@@ -304,9 +304,13 @@ typedef enum {
                                            
                                            imagePicker.allowsEditing = YES;
                                            
+                                           
+                                           
                                            [self presentViewController:imagePicker animated:YES completion:nil];
                                            
                                            NSLog(@"%@", imagePicker);
+                                           
+                                           
 
                                        }];
     
@@ -373,9 +377,18 @@ typedef enum {
 
 - (void) imagesCartTableViewCell:(int)tag {
     
-    NSLog(@"%i", tag);
-    
-    [self actionSheet];
+    NSLog(@"Tag = %i", tag);
+    if (tag == 2001) {
+        
+        
+        
+        [self actionSheet];
+        
+        self.tmpContact.kardPhotoFront = 
+
+    }
+ 
+    NSLog (@"Пора записать фотку...");
     
 }
 /*- (void) createTag:(int) tag {
@@ -430,7 +443,20 @@ typedef enum {
         
         [data writeToFile:fileName atomically:YES];
         
-        NSLog(@"%@", stringPath);
+
+        
+        
+        
+        self.tmpContact.kardPhotoFront = fileName;
+        
+        
+        
+        
+        
+        NSLog(@"%@", self.tmpContact.kardPhotoFront);
+        
+        NSLog(@"файл зображення %@", stringPath);
+        
     }
 }
 
@@ -440,5 +466,8 @@ typedef enum {
     
     NSLog(@"%@", picker);
 }
+
+
+
 
 @end
