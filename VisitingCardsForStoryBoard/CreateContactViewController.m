@@ -28,9 +28,18 @@ typedef enum {
                                            UIActionSheetDelegate,
                                            UITextFieldDelegate,
                                            ImageButtonDelegate,
-                                           UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+                                           UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
+    
+    UIImage* tempImageFirst;
+    UIImage* tempImageSecond;
+    
+    NSInteger tempTagForImageButton;
     
     StatusViewType screenType;
+                                               
+                                               
+                                               
 }
 
 @property (strong, nonatomic) Contact* tmpContact;
@@ -81,9 +90,13 @@ typedef enum {
         //self.tmpContact = [Contact tempContact:self.contact];
         
     } else {
+        
         screenType = newContact;
 
     }
+    
+    
+    
     
     if (screenType == newContact) {
         
@@ -92,7 +105,6 @@ typedef enum {
                            inManagedObjectContext:[Utilite managedObjectContext]];
         
         self.tmpContact = [Contact tempContact:self.contact];
-
         
     } else {
         
@@ -107,6 +119,22 @@ typedef enum {
 
 #pragma mark - UITableViewDataSource
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        
+        return 119.0;
+        
+    } else if (indexPath.row == 1) {
+        
+        return 163.0;
+        
+    } else {
+        
+        return 44.0;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
 }
@@ -115,9 +143,13 @@ typedef enum {
     
     if (indexPath.row == 0) {
         //повертає першу комірку з фото
+        
         ImagesCardTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:imageCardCellIdentifier];
         
         cell.delegate = self;
+        
+        cell.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoFront];
+        cell.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoBack];
         
         return cell;
         
@@ -146,26 +178,11 @@ typedef enum {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonAddSecondaryContact];
             
         }
+        
         cell.textLabel.text = [NSString stringWithFormat:@"Add the contact information"];
         cell.textLabel.textColor = [UIColor greenColor];
         
         return cell;
-        }
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row == 0) {
-        
-        return 119.0;
-        
-    } else if (indexPath.row == 1) {
-        
-        return 163.0;
-        
-    } else {
-        
-        return 44.0;
     }
 }
 
@@ -375,20 +392,11 @@ typedef enum {
 }
 #pragma mark - imagesCartTableViewCellDelegate
 
-- (void) imagesCartTableViewCell:(int)tag {
+- (void) imagesCartTableViewCell:(NSInteger)tag {
     
-    NSLog(@"Tag = %i", tag);
-    if (tag == 2001) {
-        
-        
-        
-        [self actionSheet];
-        
-        self.tmpContact.kardPhotoFront = 
-
-    }
- 
-    NSLog (@"Пора записать фотку...");
+    tempTagForImageButton = tag;
+    
+    [self actionSheet];
     
 }
 /*- (void) createTag:(int) tag {
@@ -443,19 +451,29 @@ typedef enum {
         
         [data writeToFile:fileName atomically:YES];
         
-
         
-        
-        
-        self.tmpContact.kardPhotoFront = fileName;
-        
-        
-        
-        
-        
-        NSLog(@"%@", self.tmpContact.kardPhotoFront);
+        switch (tempTagForImageButton) {
+            case LEFT_IAGE_BUTTON_TAG:
+                self.tmpContact.kardPhotoFront = fileName;
+                break;
+            case RIGHT_IAGE_BUTTON_TAG:
+                self.tmpContact.kardPhotoBack = fileName;
+                break;
+            default:
+                break;
+        }
+                
+        [self.tableView reloadData];
         
         NSLog(@"файл зображення %@", stringPath);
+        
+        
+        
+
+
+       
+        
+        NSLog(@"%@", self.tmpContact.kardPhotoFront);
         
     }
 }

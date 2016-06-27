@@ -6,12 +6,15 @@
 //  Copyright (c) 2016 Vitaliy Horodecky. All rights reserved.
 //
 
+#define LEFT_IAGE_BUTTON_TAG   2001
+#define RIGHT_IAGE_BUTTON_TAG    2002
+
 #import <UIKit/UIKit.h>
 
 
 @protocol ImageButtonDelegate <NSObject>
 
-- (void) imagesCartTableViewCell:(int)tag;
+- (void) imagesCartTableViewCell:(NSInteger)tag;
 
 @end
 

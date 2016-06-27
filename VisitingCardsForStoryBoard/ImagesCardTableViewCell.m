@@ -13,9 +13,11 @@
 
 
 - (void)awakeFromNib {
-    self.aversImageButton.tag = 2001;
-    self.reversImageButton.tag = 2002;
-     
+    
+    self.aversImageButton.tag = LEFT_IAGE_BUTTON_TAG;
+    self.reversImageButton.tag = RIGHT_IAGE_BUTTON_TAG;
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,8 +34,9 @@
     
     [self.delegate imagesCartTableViewCell:button.tag];
     
-    NSLog(@"%@", sender);
     
+       NSLog(@"%@", sender);
     
+
 }
 @end

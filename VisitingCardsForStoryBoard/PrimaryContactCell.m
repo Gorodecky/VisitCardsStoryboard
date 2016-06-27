@@ -81,8 +81,6 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    //[self.view endEditing:YES];
-    
     [_nameTextField resignFirstResponder];
     [_lastNameTextField resignFirstResponder];
     [_companyNameTextField resignFirstResponder];
