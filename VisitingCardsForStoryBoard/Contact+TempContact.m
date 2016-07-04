@@ -102,8 +102,6 @@
 }
 
 - (void) updateWithContactInformation:(Contact*) contact {
-    
-    
     self.name                          = contact.name;
     self.lastName                      = contact.lastName;
     self.surName                       = contact.surName;
