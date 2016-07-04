@@ -86,8 +86,6 @@
     [_companyNameTextField resignFirstResponder];
     [_phoneTextField resignFirstResponder];
     
-    
-
     return NO;
 }
 

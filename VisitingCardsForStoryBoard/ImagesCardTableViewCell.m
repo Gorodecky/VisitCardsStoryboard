@@ -7,7 +7,7 @@
 //
 
 #import "ImagesCardTableViewCell.h"
-
+#import "Contact.h"
 
 @implementation ImagesCardTableViewCell
 
@@ -18,7 +18,23 @@
     self.reversImageButton.tag = RIGHT_IAGE_BUTTON_TAG;
     
     
+
 }
+/*
+- (void)updateUI {
+    
+    self.nameTextField.text = self.contact.name;
+*/
+
+- (void) updateUIImage {
+    
+    self.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoFront];
+    self.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoBack];
+    
+}
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

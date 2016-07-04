@@ -465,6 +465,7 @@ typedef enum {
                 
         [self.tableView reloadData];
         
+        
         NSLog(@"файл зображення %@", stringPath);
         
         

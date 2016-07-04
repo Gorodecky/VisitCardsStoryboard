@@ -18,9 +18,11 @@
 
 @end
 
+@class Contact;
+
 @interface ImagesCardTableViewCell : UITableViewCell
 
-
+@property (nonatomic, strong) Contact *contact;
 
 @property (weak, nonatomic) IBOutlet UIImageView *aversImagesVisitingCard;
 @property (weak, nonatomic) IBOutlet UIImageView *reversImagesVisitingCard;
@@ -31,6 +33,7 @@
 
 - (IBAction)touchButton:(id)sender;
 
+- (void) updateUIImage;
 
 @end
 
