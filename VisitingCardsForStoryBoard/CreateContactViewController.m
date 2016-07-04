@@ -94,10 +94,7 @@ typedef enum {
         screenType = newContact;
 
     }
-    
-    
-    
-    
+
     if (screenType == newContact) {
         
         self.contact = [NSEntityDescription
@@ -145,11 +142,13 @@ typedef enum {
         //повертає першу комірку з фото
         
         ImagesCardTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:imageCardCellIdentifier];
-        
+        cell.contact = self.tmpContact;
         cell.delegate = self;
         
-        cell.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoFront];
-        cell.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoBack];
+        //cell.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoFront];
+        //cell.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoBack];
+        
+        [cell updateUIImage];
         
         return cell;
         
@@ -420,12 +419,8 @@ typedef enum {
     
     if([info valueForKey:@"UIImagePickerControllerEditedImage"]) //isEqualToString:@"public.image"
     {
-        
         image = [info valueForKey:@"UIImagePickerControllerOriginalImage"];
-        
-        //
-        
-        
+
         NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
         
         // New Folder is your folder name
@@ -433,9 +428,9 @@ typedef enum {
         NSError *error = nil;
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:stringPath])
-            
+        {
             [[NSFileManager defaultManager] createDirectoryAtPath:stringPath withIntermediateDirectories:NO attributes:nil error:&error];
-        
+        }
         
         NSDate *today = [NSDate date];
         
@@ -445,12 +440,13 @@ typedef enum {
         
         NSString *dateString = [dateFormat stringFromDate:today];
         
-        NSString *fileName = [stringPath stringByAppendingFormat:@"/%@.png", dateString];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", dateString];
+        
+        NSString *fullFileName = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",fileName]];
         
         NSData *data =  UIImagePNGRepresentation(image);//UIImagePNGRepresentation(image, 1.0);
         
-        [data writeToFile:fileName atomically:YES];
-        
+        [data writeToFile:fullFileName atomically:YES];
         
         switch (tempTagForImageButton) {
             case LEFT_IAGE_BUTTON_TAG:
@@ -468,14 +464,7 @@ typedef enum {
         
         NSLog(@"файл зображення %@", stringPath);
         
-        
-        
-
-
-       
-        
         NSLog(@"%@", self.tmpContact.kardPhotoFront);
-        
     }
 }
 

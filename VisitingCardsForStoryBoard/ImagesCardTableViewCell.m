@@ -13,28 +13,28 @@
 
 
 - (void)awakeFromNib {
-    
     self.aversImageButton.tag = LEFT_IAGE_BUTTON_TAG;
     self.reversImageButton.tag = RIGHT_IAGE_BUTTON_TAG;
-    
-    
-
 }
-/*
-- (void)updateUI {
-    
-    self.nameTextField.text = self.contact.name;
-*/
 
 - (void) updateUIImage {
     
-    self.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoFront];
-    self.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoBack];
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
     
+    // New Folder is your folder name
+    
+    NSString *fullFileName = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName])
+    {
+        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName];
+        self.aversImagesVisitingCard.image = image;
+        
+    }
+
+
+    self.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoBack];
 }
-
-
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
