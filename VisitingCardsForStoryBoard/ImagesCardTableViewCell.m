@@ -15,30 +15,53 @@
 - (void)awakeFromNib {
     self.aversImageButton.tag = LEFT_IAGE_BUTTON_TAG;
     self.reversImageButton.tag = RIGHT_IAGE_BUTTON_TAG;
+    
 }
 
 - (void) updateUIImage {
     
     NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
     
-    // New Folder is your folder name
+    NSString *fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
     
-    NSString *fullFileName = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName])
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1])
     {
-        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName];
+        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName1];
         self.aversImagesVisitingCard.image = image;
         
     }
-
-
-    self.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.contact.kardPhotoBack];
+    
+    NSString* fullFileName2 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@", self.contact.kardPhotoBack]];
+    
+    if ([[NSFileManager defaultManager]fileExistsAtPath:fullFileName2]) {
+        
+        UIImage* image = [UIImage imageWithContentsOfFile:fullFileName2];
+        self.reversImagesVisitingCard.image = image;
+        
+    }
+    
+    NSString *string1 =self.contact.kardPhotoFront;
+    
+    if (string1 != nil) {
+        
+        [self.aversImageButton setTitle:@"" forState:UIControlStateNormal];
+    } else {
+        [self.aversImageButton setTitle:@"Add contact" forState:UIControlStateNormal];
+    }
+    
+    NSString *string2 =self.contact.kardPhotoBack;
+    
+    if (string2 != nil) {
+        
+        [self.reversImageButton setTitle:@"" forState:UIControlStateNormal];
+    } else {
+        [self.reversImageButton setTitle:@"Add contact" forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     
     // Configure the view for the selected state
 }
@@ -50,9 +73,7 @@
     
     [self.delegate imagesCartTableViewCell:button.tag];
     
+    NSLog(@"%@", sender);
     
-       NSLog(@"%@", sender);
-    
-
 }
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "ContactsViewController.h"
-#import "Contact.h"
 #import "CreateContactViewController.h"
 #import "ContactCustomTableViewCell.h"
 #import "Section.h"
@@ -40,6 +39,8 @@ typedef enum {
     self.serchContactBar.delegate = self;
     
     self.contactSegment.selectedSegmentIndex = sortSegmentName;
+    
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -144,7 +145,9 @@ typedef enum {
     return YES; // функция разрешает выделять ячейки в таблице
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSManagedObjectContext* context = [Utilite managedObjectContext];
     
@@ -275,10 +278,28 @@ typedef enum {
         
     }
     
+    //[customCell updateCustomCell];
+    
     [customCell.firstNameLable   setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"name"]]];
     [customCell.lastNameLable    setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"lastName"]]];
     [customCell.companyNameLable setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"companyName"]]];
     
+    
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    
+    // New Folder is your folder name
+    
+    NSString *fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",[contact valueForKey:@"kardPhotoFront"]]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1])
+    {
+        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName1];
+        
+    
+    
+    [customCell.visitingCardImage setImage:image];
+    }
+    //[customCell.visitingCardImage setImage:(UIImage *)];
     return customCell;
 }
 

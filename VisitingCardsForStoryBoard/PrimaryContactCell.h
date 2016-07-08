@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kOFFSET_FOR_KEYBOARD 80.0
 
 @class Contact;
 

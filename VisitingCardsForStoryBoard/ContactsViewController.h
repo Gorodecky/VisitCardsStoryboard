@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Contact.h"
 
 @interface ContactsViewController : UIViewController
+
+@property (strong, nonatomic) Contact *contact;
 
 
 @property (weak, nonatomic) IBOutlet UISearchBar *serchContactBar;

@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class Contact;
+
 @interface ContactCustomTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) Contact *contact;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *visitingCardImage;
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *lastNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *telephoneContactLable;
+
+-(void) updateCustomCell;
 
 @end

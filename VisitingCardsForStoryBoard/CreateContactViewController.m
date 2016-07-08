@@ -15,6 +15,8 @@
 #import "Utilite.h"
 #import "Contact+TempContact.h"
 
+
+
 typedef enum {
     
     newContact,
@@ -38,8 +40,6 @@ typedef enum {
     
     StatusViewType screenType;
                                                
-                                               
-                                               
 }
 
 @property (strong, nonatomic) Contact* tmpContact;
@@ -50,10 +50,73 @@ typedef enum {
 
 //@synthesize contact;
 
+#pragma mark - keyboard textField
+
+-(void)keyboardWillShow {
+    // Animate the current view out of the way
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+
+- (void) keyboardWillHide {
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+- (void)setViewMovedUp:(BOOL)movedUp {
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
+/*
+-(void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    if ([sender isEqual:mailTf])
+    {
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+*/
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //Back Button Item//
+    
     self.navigationItem.hidesBackButton = YES;
     
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
@@ -62,6 +125,8 @@ typedef enum {
                                                                      action:@selector(back:)];
     
     self.navigationItem.leftBarButtonItem = newBackButton;//Back Button Item
+    //
+    
     
     // Підєднання комірок
     
@@ -110,6 +175,37 @@ typedef enum {
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -120,7 +216,7 @@ typedef enum {
     
     if (indexPath.row == 0) {
         
-        return 119.0;
+        return 90.0;
         
     } else if (indexPath.row == 1) {
         
@@ -144,9 +240,6 @@ typedef enum {
         ImagesCardTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:imageCardCellIdentifier];
         cell.contact = self.tmpContact;
         cell.delegate = self;
-        
-        //cell.aversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoFront];
-        //cell.reversImagesVisitingCard.image = [UIImage imageWithContentsOfFile:self.tmpContact.kardPhotoBack];
         
         [cell updateUIImage];
         
@@ -417,8 +510,8 @@ typedef enum {
     
     UIImage* image;
     
-    if([info valueForKey:@"UIImagePickerControllerEditedImage"]) //isEqualToString:@"public.image"
-    {
+    if([info valueForKey:@"UIImagePickerControllerEditedImage"]) {//isEqualToString:@"public.image"
+    
         image = [info valueForKey:@"UIImagePickerControllerOriginalImage"];
 
         NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
@@ -427,8 +520,8 @@ typedef enum {
         
         NSError *error = nil;
         
-        if (![[NSFileManager defaultManager] fileExistsAtPath:stringPath])
-        {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:stringPath]) {
+            
             [[NSFileManager defaultManager] createDirectoryAtPath:stringPath withIntermediateDirectories:NO attributes:nil error:&error];
         }
         
@@ -461,7 +554,6 @@ typedef enum {
                 
         [self.tableView reloadData];
         
-        
         NSLog(@"файл зображення %@", stringPath);
         
         NSLog(@"%@", self.tmpContact.kardPhotoFront);
@@ -474,8 +566,5 @@ typedef enum {
     
     NSLog(@"%@", picker);
 }
-
-
-
 
 @end
