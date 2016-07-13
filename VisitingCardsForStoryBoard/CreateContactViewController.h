@@ -10,11 +10,15 @@
 #import <CoreData/CoreData.h>
 #import "Contact.h"
 
+
+
 @interface CreateContactViewController : UIViewController
 
 @property (strong, nonatomic) Contact *contact;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)saveButton:(id)sender;
+
+- (void) createImageView;
 
 @end

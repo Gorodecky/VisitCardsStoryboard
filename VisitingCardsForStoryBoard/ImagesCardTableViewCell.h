@@ -6,10 +6,11 @@
 //  Copyright (c) 2016 Vitaliy Horodecky. All rights reserved.
 //
 
-#define LEFT_IAGE_BUTTON_TAG   2001
-#define RIGHT_IAGE_BUTTON_TAG    2002
+#define LEFT_IMAGE_BUTTON_TAG   2001
+#define RIGHT_IMAGE_BUTTON_TAG    2002
 
 #import <UIKit/UIKit.h>
+#import "Utilite.h"
 
 
 @protocol ImageButtonDelegate <NSObject>
@@ -23,6 +24,7 @@
 @interface ImagesCardTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) Contact *contact;
+@property (nonatomic, assign) StatusViewType viewType;
 
 @property (weak, nonatomic) IBOutlet UIImageView *aversImagesVisitingCard;
 @property (weak, nonatomic) IBOutlet UIImageView *reversImagesVisitingCard;

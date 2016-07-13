@@ -15,22 +15,15 @@
 #import "Utilite.h"
 #import "Contact+TempContact.h"
 
+@interface CreateContactViewController ()
+<UITableViewDataSource,
+UITableViewDelegate,
+UIActionSheetDelegate,
+UITextFieldDelegate,
+ImageButtonDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 
-
-typedef enum {
-    
-    newContact,
-    
-    editContact,
-    
-} StatusViewType;
-
-@interface CreateContactViewController () <UITableViewDataSource,
-                                           UITableViewDelegate,
-                                           UIActionSheetDelegate,
-                                           UITextFieldDelegate,
-                                           ImageButtonDelegate,
-                                           UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     
     UIImage* tempImageFirst;
@@ -39,10 +32,11 @@ typedef enum {
     NSInteger tempTagForImageButton;
     
     StatusViewType screenType;
-                                               
 }
 
 @property (strong, nonatomic) Contact* tmpContact;
+
+@property (assign, nonatomic) StatusViewType viewType;
 
 @end
 
@@ -54,24 +48,20 @@ typedef enum {
 
 -(void)keyboardWillShow {
     // Animate the current view out of the way
-    if (self.view.frame.origin.y >= 0)
-    {
+    if (self.view.frame.origin.y >= 0) {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
+    else if (self.view.frame.origin.y < 0) {
         [self setViewMovedUp:NO];
     }
 }
 
 
 - (void) keyboardWillHide {
-    if (self.view.frame.origin.y >= 0)
-    {
+    if (self.view.frame.origin.y >= 0) {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
+    else if (self.view.frame.origin.y < 0) {
         [self setViewMovedUp:NO];
     }
 }
@@ -82,36 +72,72 @@ typedef enum {
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
     CGRect rect = self.view.frame;
-    if (movedUp)
-    {
+    if (movedUp) {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
         rect.size.height += kOFFSET_FOR_KEYBOARD;
-    }
-    else
-    {
+    } else {
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
         rect.size.height -= kOFFSET_FOR_KEYBOARD;
     }
+    
     self.view.frame = rect;
     
     [UIView commitAnimations];
 }
 /*
--(void)textFieldDidBeginEditing:(UITextField *)sender
-{
-    if ([sender isEqual:mailTf])
-    {
-        //move the main view, so that the keyboard does not hide it.
-        if  (self.view.frame.origin.y >= 0)
-        {
-            [self setViewMovedUp:YES];
-        }
+ -(void)textFieldDidBeginEditing:(UITextField *)sender
+ {
+ if ([sender isEqual:mailTf])
+ {
+ //move the main view, so that the keyboard does not hide it.
+ if  (self.view.frame.origin.y >= 0)
+ {
+ [self setViewMovedUp:YES];
+ }
+ }
+ }
+ */
+
+#pragma mark - UIBarBatton
+
+-(void) createRightBarButtonItem {
+    
+    if (screenType == reviewContact) {
+        
+        UIBarButtonItem* editItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                     target:self
+                                     action:@selector(editAction:)];
+        
+        [self.navigationItem setRightBarButtonItem:editItem];
+        
+    } else {
+        
+        UIBarButtonItem* saveItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                     target:self
+                                     action:@selector(saveButton:)];
+        
+        [self.navigationItem setRightBarButtonItem:saveItem];
+        
     }
 }
-*/
+
+-(IBAction)editAction:(id)sender {
+    
+    screenType = editContact;
+    
+    [self createRightBarButtonItem];
+    
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - viewDidLoad
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -126,7 +152,6 @@ typedef enum {
     
     self.navigationItem.leftBarButtonItem = newBackButton;//Back Button Item
     //
-    
     
     // Підєднання комірок
     
@@ -151,28 +176,32 @@ typedef enum {
     // перевіряє чи слід створювати новий контакт чи використовувати існуючий
     
     if (self.contact) {
-        screenType = editContact;
-        //self.tmpContact = [Contact tempContact:self.contact];
+        
+        screenType = reviewContact;
+        
         
     } else {
         
         screenType = newContact;
-
+        
     }
-
+    
     if (screenType == newContact) {
         
         self.contact = [NSEntityDescription
-                           insertNewObjectForEntityForName:@"Contact"
-                           inManagedObjectContext:[Utilite managedObjectContext]];
+                        insertNewObjectForEntityForName:@"Contact"
+                        inManagedObjectContext:[Utilite managedObjectContext]];
         
         self.tmpContact = [Contact tempContact:self.contact];
         
     } else {
         
         self.tmpContact = [Contact tempContact:self.contact];
-
+        
     }
+    
+    [self createRightBarButtonItem];    //create rightBarButtonItem
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -203,9 +232,6 @@ typedef enum {
                                                   object:nil];
 }
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -218,18 +244,18 @@ typedef enum {
         
         return 90.0;
         
-    } else if (indexPath.row == 1) {
+    } else {//if (indexPath.row == 1) {
         
         return 163.0;
         
-    } else {
-        
-        return 44.0;
-    }
+    }/* else {
+      
+      return 44.0;
+      }*/
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -239,51 +265,54 @@ typedef enum {
         
         ImagesCardTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:imageCardCellIdentifier];
         cell.contact = self.tmpContact;
+        cell.viewType = screenType;
         cell.delegate = self;
         
         [cell updateUIImage];
         
         return cell;
         
-    } else if (indexPath.row == 1) {
+    } else { //if (indexPath.row == 1) {
         //повертає другу комірку з головними даними
         PrimaryContactCell* cell = [tableView dequeueReusableCellWithIdentifier:primaryContactCellIdentifier];
         
         cell.contact = self.tmpContact;
+        cell.viewType = screenType;
         [cell updateUI];
         
         return cell;
-        
-    } else if (indexPath.row == 2) {
-        //повертає інші комірки
-        SecondaryContactCell* cell = [tableView
-                                      dequeueReusableCellWithIdentifier:secondCellIdentifier];
-        return cell;
-    } else {
-        
-        static NSString * buttonAddSecondaryContact = @"addSecondaryCellIdentifier";
-        
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:buttonAddSecondaryContact ];
-        
-        if (!cell) {
-            
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonAddSecondaryContact];
-            
-        }
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"Add the contact information"];
-        cell.textLabel.textColor = [UIColor greenColor];
-        
-        return cell;
     }
+    /*
+     } else if (indexPath.row == 2) {
+     //повертає інші комірки
+     SecondaryContactCell* cell = [tableView
+     dequeueReusableCellWithIdentifier:secondCellIdentifier];
+     return cell;
+     } else {
+     
+     static NSString * buttonAddSecondaryContact = @"addSecondaryCellIdentifier";
+     
+     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:buttonAddSecondaryContact ];
+     
+     if (!cell) {
+     
+     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonAddSecondaryContact];
+     
+     }
+     
+     cell.textLabel.text = [NSString stringWithFormat:@"Add the contact information"];
+     cell.textLabel.textColor = [UIColor greenColor];
+     
+     return cell;
+     }*/
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {//убирает клаватуру с екрана
-        
     
-        [self.view endEditing:YES] ;
+    
+    [self.view endEditing:YES] ;
 }
 
 
@@ -293,7 +322,7 @@ typedef enum {
     
     
     [self.contact updateWithContactInformation:self.tmpContact];
-
+    
     NSManagedObjectContext* context = [Utilite managedObjectContext];
     
     NSError* error = nil;
@@ -312,14 +341,14 @@ typedef enum {
     } else {
         
         
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Save is complit!"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            [self.navigationController popViewControllerAnimated:YES];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Save is complit!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
 }
@@ -338,10 +367,10 @@ typedef enum {
             
             [self alertAction];
             //[self.contact updateWithContactInformation:self.tmpContact];
-
+            
             //[self saveButton:nil];
             //[self.navigationController popViewControllerAnimated:YES];
-
+            
             
         }
     } else {
@@ -374,10 +403,10 @@ typedef enum {
                                    handler:^(UIAlertAction *action) {
                                        
                                        //создеме UIImagePickerController для камеры
-
+                                       
                                        
                                        NSLog(@"camera");
-
+                                       
                                        
                                        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                                        
@@ -420,7 +449,7 @@ typedef enum {
                                            NSLog(@"%@", imagePicker);
                                            
                                            
-
+                                           
                                        }];
     
     UIAlertAction* actionCancel = [UIAlertAction
@@ -431,7 +460,7 @@ typedef enum {
                                        // необхідно видалити тег!!!
                                        //[self createTag:];
                                        [self.navigationController popViewControllerAnimated:YES];
-                                   
+                                       
                                    }];
     
     [alert addAction:actionCamera];
@@ -440,8 +469,8 @@ typedef enum {
     
     
     [self presentViewController:alert animated:YES completion:nil];
-
-
+    
+    
 }
 
 - (void) alertAction {
@@ -473,7 +502,7 @@ typedef enum {
     [alert addAction:actionSave];
     
     [self presentViewController:alert animated:YES completion:nil];
-
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -488,18 +517,110 @@ typedef enum {
     
     tempTagForImageButton = tag;
     
-    [self actionSheet];
-    
-}
-/*- (void) createTag:(int) tag {
-    
-    if (tag) {
+    if (screenType == reviewContact) {
         
-        tag = nil;
+        [self createImageView];
+        
+    } else if (screenType == editContact) {
+        
+        [self actionSheet];
 
     }
     
-}*/
+    
+}
+/*- (void) createTag:(int) tag {
+ 
+ if (tag) {
+ 
+ tag = nil;
+ 
+ }
+ 
+ }*/
+
+#pragma mark - UIImageView
+
+- (void) createImageView {
+    
+    UIImage* image;
+    
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    
+    NSString* fullFileName1;
+    
+    NSString* fullFileName2;
+    
+    if (LEFT_IMAGE_BUTTON_TAG) {
+        
+         fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1]) {
+            
+            image = [UIImage imageWithContentsOfFile:fullFileName1];
+        }
+
+    } else if (RIGHT_IMAGE_BUTTON_TAG) {
+        
+        fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoBack]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName2]) {
+            
+            image = [UIImage imageWithContentsOfFile:fullFileName2];
+        }
+        
+    }
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [imageView setImage:image];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [imageView setBackgroundColor:[UIColor blackColor]];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(tapDetected:)];
+    
+    singleTap.numberOfTapsRequired = 1;
+    [imageView setUserInteractionEnabled:YES];
+    [imageView addGestureRecognizer:singleTap];
+    
+    
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    
+    [keyWindow addSubview:imageView];
+
+   
+
+    
+    //[self.view addSubview:imageView];
+    
+    /*
+     //create an image
+     UIImage *myScreenShot = [UIImage imageNamed:@"settings-image.png"];
+     
+     //image view instance to display the image
+     self.myImageView = [[UIImageView alloc] initWithImage:myScreenShot];
+     
+     //set the frame for the image view
+     CGRect myFrame = CGRectMake(10.0f, 10.0f, self.myImageView.frame.size.width,
+     self.myImageView.frame.size.height/2);
+     [self.myImageView setFrame:myFrame];
+     
+     //If your image is bigger than the frame then you can scale it
+     [self.myImageView setContentMode:UIViewContentModeScaleAspectFit];
+     
+     //add the image view to the current view
+     [self.view addSubview:self.myImageView];
+     
+     */
+}
+
+-(void)tapDetected:(UITapGestureRecognizer *)gestureRecognizer{
+    
+   // NSLog(@"%@",gestureRecognizer);
+    
+    [gestureRecognizer.view removeFromSuperview];
+    
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 
@@ -511,9 +632,9 @@ typedef enum {
     UIImage* image;
     
     if([info valueForKey:@"UIImagePickerControllerEditedImage"]) {//isEqualToString:@"public.image"
-    
+        
         image = [info valueForKey:@"UIImagePickerControllerOriginalImage"];
-
+        
         NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
         
         // New Folder is your folder name
@@ -542,16 +663,16 @@ typedef enum {
         [data writeToFile:fullFileName atomically:YES];
         
         switch (tempTagForImageButton) {
-            case LEFT_IAGE_BUTTON_TAG:
+            case LEFT_IMAGE_BUTTON_TAG:
                 self.tmpContact.kardPhotoFront = fileName;
                 break;
-            case RIGHT_IAGE_BUTTON_TAG:
+            case RIGHT_IMAGE_BUTTON_TAG:
                 self.tmpContact.kardPhotoBack = fileName;
                 break;
             default:
                 break;
         }
-                
+        
         [self.tableView reloadData];
         
         NSLog(@"файл зображення %@", stringPath);

@@ -215,13 +215,7 @@
                             <constraint firstItem="j2d-or-0iJ" firstAttribute="bottom" secondItem="A5X-x5-5Cy" secondAttribute="bottomMargin" id="zrs-vR-ptr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="637-OR-ku0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="sbT-on-Jtb">
-                            <connections>
-                                <action selector="saveButton:" destination="zxE-Hh-vc1" id="3tb-8b-eXk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="637-OR-ku0"/>
                     <connections>
                         <outlet property="tableView" destination="j2d-or-0iJ" id="o8u-aV-3wr"/>
                     </connections>
@@ -235,6 +229,6 @@
         <image name="Contact Card-50.png" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ugT-8t-el9"/>
+        <segue reference="53U-8p-0WK"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,3 +14,12 @@
 + (NSManagedObjectContext*) managedObjectContext;
 
 @end
+
+
+typedef enum {
+    
+    newContact,
+    editContact,
+    reviewContact
+    
+} StatusViewType;

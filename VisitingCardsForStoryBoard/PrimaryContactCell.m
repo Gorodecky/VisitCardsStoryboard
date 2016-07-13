@@ -11,7 +11,6 @@
 
 @interface PrimaryContactCell () <UITextFieldDelegate>
 
-
 @end
 
 @implementation PrimaryContactCell
@@ -79,6 +78,24 @@
     
 }
 #pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+   
+    NSLog(@"%u", self.viewType);
+
+    
+    if (self.viewType == reviewContact) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
+    
+}// return NO to disallow editing.
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [_nameTextField resignFirstResponder];

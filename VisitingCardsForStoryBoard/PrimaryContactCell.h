@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Utilite.h"
+
 #define kOFFSET_FOR_KEYBOARD 80.0
 
 @class Contact;
 
 @interface PrimaryContactCell : UITableViewCell
 
+
 @property (nonatomic, strong) Contact *contact;
+@property (assign, nonatomic) StatusViewType viewType;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;

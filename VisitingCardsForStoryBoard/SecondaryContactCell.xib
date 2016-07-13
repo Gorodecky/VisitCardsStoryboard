@@ -14,29 +14,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuP-sk-IzO">
-                        <rect key="frame" x="8" y="11" width="22" height="22"/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMO-9b-5ZL">
-                        <rect key="frame" x="48" y="7" width="264" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMO-9b-5ZL">
+                        <rect key="frame" x="41" y="7" width="278" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="FMO-9b-5ZL" firstAttribute="leading" secondItem="VuP-sk-IzO" secondAttribute="trailing" constant="18" id="2Vo-T3-9Zn"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="VuP-sk-IzO" secondAttribute="bottom" constant="2" id="RqX-nS-Lpq"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FMO-9b-5ZL" secondAttribute="trailing" constant="-7" id="1up-Bm-lzq"/>
                     <constraint firstItem="FMO-9b-5ZL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="aSG-7X-srf"/>
-                    <constraint firstItem="VuP-sk-IzO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="hVS-b1-QYb"/>
-                    <constraint firstItem="VuP-sk-IzO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="oik-Vw-zDw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="FMO-9b-5ZL" secondAttribute="bottom" constant="-2" id="tKR-Ya-7jP"/>
+                    <constraint firstItem="FMO-9b-5ZL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="33" id="xKm-X0-Dbe"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addContactButton" destination="VuP-sk-IzO" id="cDy-HY-d76"/>
                 <outlet property="textField" destination="FMO-9b-5ZL" id="W42-2F-OCa"/>
             </connections>
             <point key="canvasLocation" x="214" y="222.5"/>

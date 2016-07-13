@@ -13,8 +13,8 @@
 
 
 - (void)awakeFromNib {
-    self.aversImageButton.tag = LEFT_IAGE_BUTTON_TAG;
-    self.reversImageButton.tag = RIGHT_IAGE_BUTTON_TAG;
+    self.aversImageButton.tag = LEFT_IMAGE_BUTTON_TAG;
+    self.reversImageButton.tag = RIGHT_IMAGE_BUTTON_TAG;
     
 }
 
@@ -30,6 +30,8 @@
         self.aversImagesVisitingCard.image = image;
         
     }
+    
+    //////////////
     
     NSString* fullFileName2 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@", self.contact.kardPhotoBack]];
     
