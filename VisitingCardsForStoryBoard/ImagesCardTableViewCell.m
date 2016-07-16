@@ -48,7 +48,7 @@
         
         [self.aversImageButton setTitle:@"" forState:UIControlStateNormal];
     } else {
-        [self.aversImageButton setTitle:@"Add contact" forState:UIControlStateNormal];
+        [self.aversImageButton setTitle:@"Add image" forState:UIControlStateNormal];
     }
     
     NSString *string2 =self.contact.kardPhotoBack;
@@ -57,7 +57,7 @@
         
         [self.reversImageButton setTitle:@"" forState:UIControlStateNormal];
     } else {
-        [self.reversImageButton setTitle:@"Add contact" forState:UIControlStateNormal];
+        [self.reversImageButton setTitle:@"Add image" forState:UIControlStateNormal];
     }
     
 }

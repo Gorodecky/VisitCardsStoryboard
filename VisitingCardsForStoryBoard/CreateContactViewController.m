@@ -201,7 +201,7 @@ UINavigationControllerDelegate>
     }
     
     [self createRightBarButtonItem];    //create rightBarButtonItem
-    
+    self.automaticallyAdjustsScrollViewInsets = false;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -242,7 +242,7 @@ UINavigationControllerDelegate>
     
     if (indexPath.row == 0) {
         
-        return 90.0;
+        return 133.0;
         
     } else {//if (indexPath.row == 1) {
         
@@ -525,6 +525,9 @@ UINavigationControllerDelegate>
         
         [self actionSheet];
 
+    } else {
+        
+        [self actionSheet];
     }
     
     
@@ -569,9 +572,8 @@ UINavigationControllerDelegate>
         
     }
     
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     
-    [imageView setImage:image];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
     [imageView setBackgroundColor:[UIColor blackColor]];
     
@@ -584,39 +586,53 @@ UINavigationControllerDelegate>
     [imageView addGestureRecognizer:singleTap];
     
     
-    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
-    [keyWindow addSubview:imageView];
+    [window addSubview:imageView];
+    
+    //window.translatesAutoresizingMaskIntoConstraints = NO;
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [window addConstraint:
+     [NSLayoutConstraint constraintWithItem:imageView
+                                  attribute:NSLayoutAttributeWidth
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:window
+                                  attribute:NSLayoutAttributeWidth
+                                 multiplier:1.0
+                                   constant:0]];
+    
+    [window addConstraint:
+     [NSLayoutConstraint constraintWithItem:imageView
+                                  attribute:NSLayoutAttributeHeight
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:window
+                                  attribute:NSLayoutAttributeHeight
+                                 multiplier:1.0
+                                   constant:0]];
+  
+    [window addConstraint:
+     [NSLayoutConstraint constraintWithItem:imageView
+                                  attribute:NSLayoutAttributeCenterX
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:window
+                                  attribute:NSLayoutAttributeCenterX
+                                 multiplier:1.0
+                                   constant:0]];
+    
+    [window addConstraint:
+     [NSLayoutConstraint constraintWithItem:imageView
+                                  attribute:NSLayoutAttributeCenterY
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:window
+                                  attribute:NSLayoutAttributeCenterY
+                                 multiplier:1.0
+                                   constant:0]];
 
-   
-
     
-    //[self.view addSubview:imageView];
-    
-    /*
-     //create an image
-     UIImage *myScreenShot = [UIImage imageNamed:@"settings-image.png"];
-     
-     //image view instance to display the image
-     self.myImageView = [[UIImageView alloc] initWithImage:myScreenShot];
-     
-     //set the frame for the image view
-     CGRect myFrame = CGRectMake(10.0f, 10.0f, self.myImageView.frame.size.width,
-     self.myImageView.frame.size.height/2);
-     [self.myImageView setFrame:myFrame];
-     
-     //If your image is bigger than the frame then you can scale it
-     [self.myImageView setContentMode:UIViewContentModeScaleAspectFit];
-     
-     //add the image view to the current view
-     [self.view addSubview:self.myImageView];
-     
-     */
 }
 
 -(void)tapDetected:(UITapGestureRecognizer *)gestureRecognizer{
-    
-   // NSLog(@"%@",gestureRecognizer);
     
     [gestureRecognizer.view removeFromSuperview];
     
