@@ -11,7 +11,7 @@
             <objects>
                 <navigationController id="WQu-fD-2Ft" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contact" image="Contact Card-50.png" id="weg-ry-TNI"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sMM-mA-WfB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,7 +26,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UAG-Uu-agl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-176" y="-175"/>
+            <point key="canvasLocation" x="-243.75" y="-176.25"/>
         </scene>
         <!--CONTACTS-->
         <scene sceneID="atk-d3-EJv">
@@ -70,20 +70,33 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="atV-d5-B5l" id="Til-dk-KSn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7em-Xh-6P7">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7em-Xh-6P7">
                                                     <rect key="frame" x="0.0" y="10" width="98" height="50"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone number..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="177" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-uF-nIp">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+380984794643" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="177" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-uF-nIp">
                                                     <rect key="frame" x="221" y="42" width="146" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="118" id="qAA-BI-t0U"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="qAA-BI-t0U"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=compact-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="qAA-BI-t0U"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-XA-Ka4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-XA-Ka4">
                                                     <rect key="frame" x="106" y="2" width="127" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="oyL-bS-nDj"/>
-                                                        <constraint firstAttribute="width" constant="127" id="v8V-ze-cei"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="v8V-ze-cei"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,15 +107,15 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="156" translatesAutoresizingMaskIntoConstraints="NO" id="Ihn-uc-na6">
-                                                    <rect key="frame" x="234" y="2" width="133" height="28"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Company" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="84" translatesAutoresizingMaskIntoConstraints="NO" id="FgD-be-S0Y">
+                                                    <rect key="frame" x="106" y="42" width="101" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Company" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="84" translatesAutoresizingMaskIntoConstraints="NO" id="FgD-be-S0Y">
-                                                    <rect key="frame" x="106" y="42" width="101" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="156" translatesAutoresizingMaskIntoConstraints="NO" id="Ihn-uc-na6">
+                                                    <rect key="frame" x="234" y="2" width="133" height="28"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -114,19 +127,47 @@
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="top" secondItem="Til-dk-KSn" secondAttribute="topMargin" constant="-6" id="AZI-Mx-FAE"/>
                                                 <constraint firstItem="7em-Xh-6P7" firstAttribute="leading" secondItem="Til-dk-KSn" secondAttribute="leading" id="O5u-cu-dNO"/>
                                                 <constraint firstItem="o0i-uF-nIp" firstAttribute="top" secondItem="RRG-XA-Ka4" secondAttribute="bottom" constant="12" id="Rjx-Vp-hdS"/>
-                                                <constraint firstItem="Ihn-uc-na6" firstAttribute="leading" secondItem="RRG-XA-Ka4" secondAttribute="trailing" constant="1" id="V15-kR-4X4"/>
+                                                <constraint firstItem="o0i-uF-nIp" firstAttribute="leading" secondItem="FgD-be-S0Y" secondAttribute="trailing" constant="14" id="SRi-EO-knE">
+                                                    <variation key="heightClass=compact-widthClass=compact" constant="21"/>
+                                                </constraint>
+                                                <constraint firstItem="Ihn-uc-na6" firstAttribute="leading" secondItem="RRG-XA-Ka4" secondAttribute="trailing" constant="11" id="V15-kR-4X4">
+                                                    <variation key="heightClass=compact-widthClass=compact" constant="8"/>
+                                                </constraint>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FgD-be-S0Y" secondAttribute="bottom" constant="-1" id="VFV-QZ-TFP"/>
                                                 <constraint firstItem="FgD-be-S0Y" firstAttribute="bottom" secondItem="o0i-uF-nIp" secondAttribute="bottom" id="Yd1-EM-A1c"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="leading" secondItem="7em-Xh-6P7" secondAttribute="trailing" constant="8" symbolic="YES" id="ef3-Qo-dOO"/>
+                                                <constraint firstItem="o0i-uF-nIp" firstAttribute="bottom" secondItem="FgD-be-S0Y" secondAttribute="bottom" id="lOT-v2-wFU"/>
+                                                <constraint firstItem="o0i-uF-nIp" firstAttribute="top" secondItem="FgD-be-S0Y" secondAttribute="top" id="o6D-gq-ERS"/>
                                                 <constraint firstItem="7em-Xh-6P7" firstAttribute="top" secondItem="Til-dk-KSn" secondAttribute="topMargin" constant="2" id="oyz-Cm-2Rc"/>
                                                 <constraint firstItem="o0i-uF-nIp" firstAttribute="leading" secondItem="FgD-be-S0Y" secondAttribute="trailing" constant="14" id="r18-63-5fc"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="baseline" secondItem="Ihn-uc-na6" secondAttribute="baseline" id="sPS-ZZ-pwp"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="leading" secondItem="Til-dk-KSn" secondAttribute="leading" constant="106" id="uBe-2k-EqR"/>
+                                                <constraint firstItem="o0i-uF-nIp" firstAttribute="top" secondItem="Ihn-uc-na6" secondAttribute="bottom" constant="12" id="v5h-6d-tNw"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="leading" secondItem="7em-Xh-6P7" secondAttribute="trailing" constant="8" id="vQq-IK-1bv"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="firstBaseline" secondItem="Ihn-uc-na6" secondAttribute="firstBaseline" id="xol-dj-ecf"/>
                                                 <constraint firstItem="FgD-be-S0Y" firstAttribute="leading" secondItem="7em-Xh-6P7" secondAttribute="trailing" constant="8" symbolic="YES" id="zaO-Yi-Ndr"/>
                                                 <constraint firstItem="RRG-XA-Ka4" firstAttribute="leading" secondItem="FgD-be-S0Y" secondAttribute="leading" id="zzV-JY-H4r"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="SRi-EO-knE"/>
+                                                    <exclude reference="lOT-v2-wFU"/>
+                                                    <exclude reference="o6D-gq-ERS"/>
+                                                    <exclude reference="v5h-6d-tNw"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=compact-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <exclude reference="7eZ-lT-R1t"/>
+                                                    <exclude reference="Yd1-EM-A1c"/>
+                                                    <exclude reference="Rjx-Vp-hdS"/>
+                                                    <include reference="SRi-EO-knE"/>
+                                                    <include reference="lOT-v2-wFU"/>
+                                                    <include reference="o6D-gq-ERS"/>
+                                                    <exclude reference="r18-63-5fc"/>
+                                                    <include reference="v5h-6d-tNw"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="companyNameLable" destination="FgD-be-S0Y" id="1Tr-m2-hPT"/>
@@ -179,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dkt-HB-Asx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300" y="-175"/>
+            <point key="canvasLocation" x="416.25" y="-176.25"/>
         </scene>
         <!--Create Contact View Controller-->
         <scene sceneID="zAd-O4-F0Q">
@@ -217,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onK-WI-pcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="-175"/>
+            <point key="canvasLocation" x="1022.25" y="-176.25"/>
         </scene>
     </scenes>
     <resources>
