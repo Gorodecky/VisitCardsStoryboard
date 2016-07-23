@@ -12,6 +12,16 @@
 
 @implementation ContactCustomTableViewCell
 
+-(void)prepareForReuse {
+    
+    [super prepareForReuse];
+    self.visitingCardImage.image =  nil;
+    self.firstNameLable.text =     @" ";
+    self.lastNameLable.text =      @" ";
+    self.companyNameLable.text =   @" ";
+    self.phoneContactLable.text =  @" ";
+    
+}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -30,9 +40,24 @@
     self.firstNameLable.text = self.contact.name;
     self.lastNameLable.text = self.contact.lastName;
     self.companyNameLable.text = self.contact.companyName;
-    self.telephoneContactLable.text = self.contact.contactTelephone1;
+    self.phoneContactLable.text = self.contact.contactTelephone1;
     
     
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                 NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    
+    // New Folder is your folder name
+    
+    NSString *fullFileName = [stringPath stringByAppendingString:
+                              [NSString stringWithFormat:@"/%@",
+                               [self.contact valueForKey:@"kardPhotoFront"]]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName]) {
+        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName];
+        
+        [self.visitingCardImage setImage:image];
+        
+    }
 }
 
 @end

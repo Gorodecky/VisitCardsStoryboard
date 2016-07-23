@@ -242,7 +242,7 @@ UINavigationControllerDelegate>
     
     if (indexPath.row == 0) {
         
-        return 133.0;
+        return 123.0;
         
     } else {//if (indexPath.row == 1) {
         
@@ -311,7 +311,6 @@ UINavigationControllerDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {//убирает клаватуру с екрана
     
-    
     [self.view endEditing:YES] ;
 }
 
@@ -366,10 +365,6 @@ UINavigationControllerDelegate>
         } else {
             
             [self alertAction];
-            //[self.contact updateWithContactInformation:self.tmpContact];
-            
-            //[self saveButton:nil];
-            //[self.navigationController popViewControllerAnimated:YES];
             
             
         }
@@ -381,7 +376,6 @@ UINavigationControllerDelegate>
             
         } else {
             
-            //UIAlertController!!!
             [self alertAction];
             
         }
@@ -519,12 +513,24 @@ UINavigationControllerDelegate>
     
     if (screenType == reviewContact) {
         
-        [self createImageView];
+        if (tag == 2001 && self.contact.kardPhotoFront != nil) {
+            [self createImageView];
+            return;
+        }
+        if (tag == 2002 && self.contact.kardPhotoBack != nil) {
+            [self createImageView];
+            
+            return;
+            
+        } else {
+            
+            [self actionSheet];
+        }
         
-    } else if (screenType == editContact) {
+    } else if (screenType == editContact)  {
         
         [self actionSheet];
-
+        
     } else {
         
         [self actionSheet];
@@ -554,17 +560,17 @@ UINavigationControllerDelegate>
     
     NSString* fullFileName2;
     
-    if (LEFT_IMAGE_BUTTON_TAG) {
+    if (tempTagForImageButton == LEFT_IMAGE_BUTTON_TAG) {
         
-         fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+        fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1]) {
             
             image = [UIImage imageWithContentsOfFile:fullFileName1];
         }
-
-    } else if (RIGHT_IMAGE_BUTTON_TAG) {
         
-        fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoBack]];
+    } else if (tempTagForImageButton == RIGHT_IMAGE_BUTTON_TAG) {
+        
+        fullFileName2 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoBack]];
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName2]) {
             
             image = [UIImage imageWithContentsOfFile:fullFileName2];
@@ -610,7 +616,7 @@ UINavigationControllerDelegate>
                                   attribute:NSLayoutAttributeHeight
                                  multiplier:1.0
                                    constant:0]];
-  
+    
     [window addConstraint:
      [NSLayoutConstraint constraintWithItem:imageView
                                   attribute:NSLayoutAttributeCenterX
@@ -628,7 +634,7 @@ UINavigationControllerDelegate>
                                   attribute:NSLayoutAttributeCenterY
                                  multiplier:1.0
                                    constant:0]];
-
+    
     
 }
 

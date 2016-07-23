@@ -111,10 +111,6 @@ typedef enum {
         NSString* sortString = @"companyName";
         [self sortContactsArray:sortString];
         
-    } else if (self.contactSegment.selectedSegmentIndex == sortSegmentDateOfCreation) {
-        
-        NSString* sortString = @"dateOfCreationContact";
-        [self sortContactsArray:sortString];
     }
 }
 
@@ -135,7 +131,6 @@ typedef enum {
     
     [self.tableView reloadData];
     
-    //self.groupsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 }
 
 #pragma mark UITableViewDelegate
@@ -240,7 +235,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - UITableViewDataSource
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (self.serchContactBar.text.length == 0) {
@@ -266,41 +260,30 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                                                        reuseIdentifier:identifier];
     }
     
-    NSManagedObject* contact = nil;
+    //NSManagedObject* contact = nil;
     
     if (self.serchContactBar.text.length == 0) {
         
-        contact = [self.groupsArray objectAtIndex:indexPath.row];
+        customCell.contact = [self.groupsArray objectAtIndex:indexPath.row];
+        
+        
+        [customCell updateCustomCell];
+        
+        
+        return customCell;
         
     } else {
         
-        contact = [self.searchResults objectAtIndex:indexPath.row];
+        customCell.contact = [self.searchResults objectAtIndex:indexPath.row];
         
+        
+        [customCell updateCustomCell];
+        
+        
+        return customCell;
     }
     
-    //[customCell updateCustomCell];
     
-    [customCell.firstNameLable   setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"name"]]];
-    [customCell.lastNameLable    setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"lastName"]]];
-    [customCell.companyNameLable setText:[NSString stringWithFormat:@"%@", [contact valueForKey:@"companyName"]]];
-    
-    
-    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
-    
-    // New Folder is your folder name
-    
-    NSString *fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",[contact valueForKey:@"kardPhotoFront"]]];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1])
-    {
-        UIImage *image = [UIImage imageWithContentsOfFile:fullFileName1];
-        
-    
-    
-    [customCell.visitingCardImage setImage:image];
-    }
-    //[customCell.visitingCardImage setImage:(UIImage *)];
-    return customCell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

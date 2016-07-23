@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *lastNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLable;
-@property (weak, nonatomic) IBOutlet UILabel *telephoneContactLable;
+@property (weak, nonatomic) IBOutlet UILabel *phoneContactLable;
 
 -(void) updateCustomCell;
 
