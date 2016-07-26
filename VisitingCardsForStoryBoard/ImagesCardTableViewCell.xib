@@ -16,7 +16,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9J-ou-Xq1">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="122"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Z-Ge-oL1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Z-Ge-oL1">
                                 <rect key="frame" x="10" y="16" width="180" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="IZP-2m-Qz6"/>
@@ -45,7 +45,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gON-24-06K">
                         <rect key="frame" x="200" y="0.0" width="200" height="122"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JnU-Rl-YOh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="JnU-Rl-YOh">
                                 <rect key="frame" x="10" y="16" width="180" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="CDF-o4-rQW"/>
@@ -97,4 +97,7 @@
             <point key="canvasLocation" x="386" y="141.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="placeholder.png" width="622" height="415"/>
+    </resources>
 </document>

@@ -10,6 +10,7 @@
 		D50634111CB7F3C900008358 /* ContactCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D50634101CB7F3C900008358 /* ContactCustomTableViewCell.m */; };
 		D509A9F51C9948220068624D /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D509A9F41C9948220068624D /* ContactsViewController.m */; };
 		D515301B1CE5194C001472CC /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D515301A1CE5194C001472CC /* Section.m */; };
+		D57364EC1D4661AF00D4D949 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D57364EB1D4661AF00D4D949 /* placeholder.png */; };
 		D59674431D045AFE00A2232A /* Contact+TempContact.m in Sources */ = {isa = PBXBuildFile; fileRef = D59674421D045AFE00A2232A /* Contact+TempContact.m */; };
 		D59E3CA51CFDB48C00ACAC42 /* Utilite.m in Sources */ = {isa = PBXBuildFile; fileRef = D59E3CA41CFDB48C00ACAC42 /* Utilite.m */; };
 		D5C145041CEE5104006099AD /* PrimaryContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C145021CEE5104006099AD /* PrimaryContactCell.m */; };
@@ -52,6 +53,7 @@
 		D509A9F41C9948220068624D /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		D51530191CE5194C001472CC /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		D515301A1CE5194C001472CC /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		D57364EB1D4661AF00D4D949 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		D59674411D045AFE00A2232A /* Contact+TempContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+TempContact.h"; sourceTree = "<group>"; };
 		D59674421D045AFE00A2232A /* Contact+TempContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+TempContact.m"; sourceTree = "<group>"; };
 		D59E3CA31CFDB48C00ACAC42 /* Utilite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilite.h; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		D5F9FAA31C96F90E00A0760F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D57364EB1D4661AF00D4D949 /* placeholder.png */,
 				D5F9FABC1C973FC200A0760F /* Settings-50@2x.png */,
 				D5F9FABA1C973FAC00A0760F /* Settings-50@1x.png */,
 				D5F9FAB81C973F8800A0760F /* Contact Card-50@2x.png */,
@@ -309,6 +312,7 @@
 				D5F9FA891C96F0E400A0760F /* Main.storyboard in Resources */,
 				D5DE16331CF39FBC000175A5 /* SecondaryContactCell.xib in Resources */,
 				D5E60E4A1CED09BC005B2F2D /* ImagesCardTableViewCell.xib in Resources */,
+				D57364EC1D4661AF00D4D949 /* placeholder.png in Resources */,
 				D5F9FA8E1C96F0E400A0760F /* LaunchScreen.xib in Resources */,
 				D5F9FAB91C973F8800A0760F /* Contact Card-50@2x.png in Resources */,
 				D5F9FA8B1C96F0E400A0760F /* Images.xcassets in Resources */,
@@ -476,6 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VisitingCardsForStoryBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -486,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VisitingCardsForStoryBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

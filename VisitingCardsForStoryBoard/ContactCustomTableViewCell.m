@@ -15,11 +15,11 @@
 -(void)prepareForReuse {
     
     [super prepareForReuse];
-    self.visitingCardImage.image =  nil;
-    self.firstNameLable.text =     @" ";
-    self.lastNameLable.text =      @" ";
-    self.companyNameLable.text =   @" ";
-    self.phoneContactLable.text =  @" ";
+    self.visitingCardImage.image =  [UIImage imageNamed:@"placeholder.png"];
+    self.firstNameLable.text =     @"";
+    self.lastNameLable.text =      @"";
+    self.companyNameLable.text =   @"";
+    self.phoneContactLable.text =  @"";
     
 }
 

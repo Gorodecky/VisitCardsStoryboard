@@ -20,12 +20,15 @@
 
 - (void) updateUIImage {
     
-    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains
+                             (NSDocumentDirectory, NSUserDomainMask, YES)
+                             objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
     
-    NSString *fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+    NSString *fullFileName1 = [stringPath stringByAppendingString:
+                               [NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1])
-    {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1]) {
+        
         UIImage *image = [UIImage imageWithContentsOfFile:fullFileName1];
         self.aversImagesVisitingCard.image = image;
         
@@ -33,7 +36,8 @@
     
     //////////////
     
-    NSString* fullFileName2 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@", self.contact.kardPhotoBack]];
+    NSString* fullFileName2 = [stringPath stringByAppendingString:
+                               [NSString stringWithFormat:@"/%@", self.contact.kardPhotoBack]];
     
     if ([[NSFileManager defaultManager]fileExistsAtPath:fullFileName2]) {
         
@@ -56,7 +60,9 @@
     if (string2 != nil) {
         
         [self.reversImageButton setTitle:@"" forState:UIControlStateNormal];
+        
     } else {
+        
         [self.reversImageButton setTitle:@"Add image" forState:UIControlStateNormal];
     }
     

@@ -89,7 +89,10 @@
 - (BOOL) isParametersEqual:(NSString*)firstParameter secondParameter:(NSString*)secondParameter {
     
     if (firstParameter == nil && secondParameter == nil) {
-        //поля лдгпкові
+        
+        return YES;
+        
+        
     } else {
         
         if ([secondParameter isEqualToString:firstParameter] == NO) {

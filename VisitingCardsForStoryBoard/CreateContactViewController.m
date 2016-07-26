@@ -264,6 +264,13 @@ UINavigationControllerDelegate>
         //повертає першу комірку з фото
         
         ImagesCardTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:imageCardCellIdentifier];
+        //cell.userInteractionEnabled = NO;
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor clearColor];
+        [cell setSelectedBackgroundView:bgColorView];
+        
+        
         cell.contact = self.tmpContact;
         cell.viewType = screenType;
         cell.delegate = self;
@@ -275,7 +282,13 @@ UINavigationControllerDelegate>
     } else { //if (indexPath.row == 1) {
         //повертає другу комірку з головними даними
         PrimaryContactCell* cell = [tableView dequeueReusableCellWithIdentifier:primaryContactCellIdentifier];
+        //cell.userInteractionEnabled = NO;
         
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor clearColor];
+        [cell setSelectedBackgroundView:bgColorView];
+
         cell.contact = self.tmpContact;
         cell.viewType = screenType;
         [cell updateUI];
@@ -319,6 +332,15 @@ UINavigationControllerDelegate>
 
 - (IBAction)saveButton:(id)sender {
     
+    if (screenType == newContact) {
+        if ([self.tmpContact isEqualContact:self.contact]) {
+            
+            [[Utilite managedObjectContext] deleteObject:self.contact];
+            [self.navigationController popViewControllerAnimated:YES];
+
+            return;
+        }
+    }
     
     [self.contact updateWithContactInformation:self.tmpContact];
     
@@ -334,22 +356,15 @@ UINavigationControllerDelegate>
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
         [alert show];
+        [self.navigationController popViewControllerAnimated:YES];
         
         NSLog(@"Save ERROR %@, %@", error, [error localizedDescription]);
         
     } else {
-        
-        
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Save is complit!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-        [alert show];
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
+       
+        [self saveAlert];
     }
+    
 }
 
 - (void) back:(UIBarButtonItem *)sender {
@@ -366,8 +381,7 @@ UINavigationControllerDelegate>
             
             [self alertAction];
             
-            
-        }
+                }
     } else {
         
         if ([self.tmpContact isEqualContact:self.contact]) {
@@ -384,6 +398,35 @@ UINavigationControllerDelegate>
 
 #pragma mark - AlertAction
 
+- (void) saveAlert {
+    UIAlertController* saveAlert = [UIAlertController
+                                    alertControllerWithTitle:@"Save"
+                                    message:@"Saved contact?"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    UIAlertAction* actionCancel = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *  action) {
+                                       
+                                       
+                                       return ;
+                                       
+                                   }];
+    
+    [saveAlert addAction:actionOk];
+    [saveAlert addAction:actionCancel];
+    
+    
+    [self presentViewController:saveAlert animated:YES completion:nil];
+    
+}
+
 - (void) actionSheet {
     
     UIAlertController * alert = [UIAlertController
@@ -399,7 +442,7 @@ UINavigationControllerDelegate>
                                        //создеме UIImagePickerController для камеры
                                        
                                        
-                                       NSLog(@"camera");
+                                       //NSLog(@"camera");
                                        
                                        
                                        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -440,7 +483,7 @@ UINavigationControllerDelegate>
                                            
                                            [self presentViewController:imagePicker animated:YES completion:nil];
                                            
-                                           NSLog(@"%@", imagePicker);
+                                           //NSLog(@"%@", imagePicker);
                                            
                                            
                                            
@@ -451,9 +494,8 @@ UINavigationControllerDelegate>
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *  action) {
                                        
-                                       // необхідно видалити тег!!!
-                                       //[self createTag:];
-                                       [self.navigationController popViewControllerAnimated:YES];
+                                       
+                                       [self deleteTag:tempTagForImageButton];
                                        
                                    }];
     
@@ -464,6 +506,14 @@ UINavigationControllerDelegate>
     
     [self presentViewController:alert animated:YES completion:nil];
     
+    
+}
+
+- (void) deleteTag: (NSInteger) tag {
+    
+    if (tag != 0) {
+        tempTagForImageButton = 0;
+    }
     
 }
 
@@ -481,7 +531,7 @@ UINavigationControllerDelegate>
                                      //чи потрібна тут перевірка на відсутність тексту???
                                      //[self.contact updateWithContactInformation:self.tmpContact];
                                      [self saveButton:nil];
-                                     [self.navigationController popViewControllerAnimated:YES];
+                                     //[self.navigationController popViewControllerAnimated:YES];
                                  }];
     
     UIAlertAction* actionCancel = [UIAlertAction

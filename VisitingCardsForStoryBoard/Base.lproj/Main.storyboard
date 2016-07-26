@@ -70,7 +70,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="atV-d5-B5l" id="Til-dk-KSn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7em-Xh-6P7">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="7em-Xh-6P7">
                                                     <rect key="frame" x="0.0" y="10" width="98" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="98" id="pa5-8K-KiM"/>
@@ -222,6 +222,7 @@
     </scenes>
     <resources>
         <image name="Contact Card-50.png" width="42" height="42"/>
+        <image name="placeholder.png" width="622" height="415"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="53U-8p-0WK"/>
