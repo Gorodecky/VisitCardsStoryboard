@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *serchContactBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *contactSegment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *noResultsView;
+@property (weak, nonatomic) IBOutlet UIView *addContactView;
 
 @end

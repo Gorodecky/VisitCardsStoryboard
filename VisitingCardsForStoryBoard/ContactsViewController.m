@@ -40,7 +40,21 @@ typedef enum {
     
     self.contactSegment.selectedSegmentIndex = sortSegmentName;
     
+    [self showAddContactView];
     
+}
+
+- (void) showAddContactView {
+    
+    if (self.groupsArray.count == 0) {
+        
+        self.addContactView.hidden = NO;
+        [self.view bringSubviewToFront:self.addContactView];
+        
+    } else {
+        
+        self.addContactView.hidden = YES;
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -51,42 +65,6 @@ typedef enum {
     
 }
 
-/*
- - (NSArray*) generateSectionsFromArray: (NSArray*) array withFilter:(NSString*) filterString {
- 
- NSMutableArray* sectionArray = [NSMutableArray array];
- 
- NSString* currentLeter = nil;
- 
- for (NSString* string in self.groupsArray) {
- 
- if ([filterString length] && [string rangeOfString:filterString].location == NSNotFound) {
- continue;
- }
- 
- NSString* firstLeter = [string substringToIndex:1];
- 
- Section* section = nil;
- 
- if (![currentLeter isEqualToString:firstLeter]) {
- section = [[Section alloc] init];
- section.sectionName = firstLeter;
- section.itemsArray = [NSMutableArray array];
- currentLeter = firstLeter;
- [sectionArray addObject:section];
- 
- } else {
- 
- section = [sectionArray lastObject];
- }
- 
- [section.itemsArray addObject:string];
- }
- return sectionArray;
- 
- 
- }
- */
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
@@ -128,7 +106,8 @@ typedef enum {
     
     self.groupsArray = [[managedObjectContext executeFetchRequest:fetchRequest
                                                             error:nil]mutableCopy];
-    
+    [self showAddContactView];
+
     [self.tableView reloadData];
     
 }
@@ -160,6 +139,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.groupsArray removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
+        
+        
+
     } else {
         
         [context deleteObject:[self.searchResults objectAtIndex:indexPath.row]];
@@ -174,8 +156,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.searchResults removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
-        
+
     }
+    
+    [self.tableView reloadData];
+    [self showAddContactView];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -190,13 +175,22 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.serchContactBar resignFirstResponder];
     
     [self.serchContactBar setShowsCancelButton:NO animated:YES];
+    
+    [self.serchContactBar setText:nil];
+    
+    self.tableView.hidden = NO;
+
+    
+    [self.tableView reloadData];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {   // called when text changes (including clear)
     
     [self filterContentForSearchText:searchText];
     
-    [self.tableView reloadData];
+    [self searchResultIsNill];
+    
+    //[self.tableView reloadData];
     
 }
 
@@ -231,7 +225,48 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                                                                     error:&error];
     
     self.searchResults = [result mutableCopy];
+    
+    
+    
 }
+
+- (void) searchResultIsNill {
+    if (self.searchResults.count == 0 && self.serchContactBar.text.length != 0) {
+        
+        self.tableView.hidden = YES;
+        //[self showViewNoResultsFound];
+        
+    } else if (self.searchResults.count != 0 && self.serchContactBar.text.length != 0){
+    
+    
+    self.tableView.hidden = NO;
+    [self.tableView reloadData];
+        
+    } else {
+        
+        self.tableView.hidden = NO;
+        [self.tableView reloadData];
+
+    }
+}
+/*
+- (void) showViewNoResultsFound {
+    
+    
+    UIView* noResultsView = [[UIView alloc]
+                             initWithFrame:
+                             CGRectMake
+                             (8, 138,
+                              self.tableView.frame.size.width,
+                              self.tableView.frame.size.height)];
+    
+    [noResultsView setBackgroundColor:[UIColor redColor]];
+    
+    [self.view addSubview:noResultsView];
+    
+    
+}*/
+
 
 #pragma mark - UITableViewDataSource
 
@@ -244,9 +279,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     } else {
         
         return self.searchResults.count;
-        
     }
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     

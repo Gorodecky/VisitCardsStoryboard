@@ -38,6 +38,9 @@ UINavigationControllerDelegate>
 
 @property (assign, nonatomic) StatusViewType viewType;
 
+@property (weak,nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstraint;
+
+
 @end
 
 @implementation CreateContactViewController
@@ -201,7 +204,11 @@ UINavigationControllerDelegate>
     }
     
     [self createRightBarButtonItem];    //create rightBarButtonItem
+    
     self.automaticallyAdjustsScrollViewInsets = false;
+    
+   
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -252,6 +259,8 @@ UINavigationControllerDelegate>
       
       return 44.0;
       }*/
+    
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -588,15 +597,6 @@ UINavigationControllerDelegate>
     
     
 }
-/*- (void) createTag:(int) tag {
- 
- if (tag) {
- 
- tag = nil;
- 
- }
- 
- }*/
 
 #pragma mark - UIImageView
 

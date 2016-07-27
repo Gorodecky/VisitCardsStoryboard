@@ -10,6 +10,7 @@
 		D50634111CB7F3C900008358 /* ContactCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D50634101CB7F3C900008358 /* ContactCustomTableViewCell.m */; };
 		D509A9F51C9948220068624D /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D509A9F41C9948220068624D /* ContactsViewController.m */; };
 		D515301B1CE5194C001472CC /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D515301A1CE5194C001472CC /* Section.m */; };
+		D54AC9101D47888B004DDA6E /* No-results-found.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D54AC90F1D47888B004DDA6E /* No-results-found.jpg */; };
 		D57364EC1D4661AF00D4D949 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D57364EB1D4661AF00D4D949 /* placeholder.png */; };
 		D59674431D045AFE00A2232A /* Contact+TempContact.m in Sources */ = {isa = PBXBuildFile; fileRef = D59674421D045AFE00A2232A /* Contact+TempContact.m */; };
 		D59E3CA51CFDB48C00ACAC42 /* Utilite.m in Sources */ = {isa = PBXBuildFile; fileRef = D59E3CA41CFDB48C00ACAC42 /* Utilite.m */; };
@@ -53,6 +54,7 @@
 		D509A9F41C9948220068624D /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		D51530191CE5194C001472CC /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		D515301A1CE5194C001472CC /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		D54AC90F1D47888B004DDA6E /* No-results-found.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "No-results-found.jpg"; sourceTree = "<group>"; };
 		D57364EB1D4661AF00D4D949 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		D59674411D045AFE00A2232A /* Contact+TempContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+TempContact.h"; sourceTree = "<group>"; };
 		D59674421D045AFE00A2232A /* Contact+TempContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+TempContact.m"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		D5F9FAA31C96F90E00A0760F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D54AC90F1D47888B004DDA6E /* No-results-found.jpg */,
 				D57364EB1D4661AF00D4D949 /* placeholder.png */,
 				D5F9FABC1C973FC200A0760F /* Settings-50@2x.png */,
 				D5F9FABA1C973FAC00A0760F /* Settings-50@1x.png */,
@@ -321,6 +324,7 @@
 				D5F9FAB71C973F7400A0760F /* Contact Card-50@1x.png in Resources */,
 				D5F9FABD1C973FC200A0760F /* Settings-50@2x.png in Resources */,
 				D5C145051CEE5104006099AD /* PrimaryContactCell.xib in Resources */,
+				D54AC9101D47888B004DDA6E /* No-results-found.jpg in Resources */,
 				D5F9FAB51C973E1A00A0760F /* Camera-50@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
