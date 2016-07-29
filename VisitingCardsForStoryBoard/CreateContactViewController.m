@@ -49,7 +49,8 @@ UINavigationControllerDelegate>
 
 #pragma mark - keyboard textField
 
--(void)keyboardWillShow {
+-(void)keyboardWillShow:(NSNotification*) notificstion {
+    
     // Animate the current view out of the way
     if (self.view.frame.origin.y >= 0) {
         [self setViewMovedUp:YES];
@@ -60,7 +61,10 @@ UINavigationControllerDelegate>
 }
 
 
-- (void) keyboardWillHide {
+- (void) keyboardWillHide:(NSNotification*)notification {
+    
+    
+    NSLog(@"%@",notification);
     if (self.view.frame.origin.y >= 0) {
         [self setViewMovedUp:YES];
     }
@@ -75,6 +79,9 @@ UINavigationControllerDelegate>
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
     CGRect rect = self.view.frame;
+    
+        
+    
     if (movedUp) {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
@@ -91,18 +98,43 @@ UINavigationControllerDelegate>
     [UIView commitAnimations];
 }
 /*
- -(void)textFieldDidBeginEditing:(UITextField *)sender
- {
- if ([sender isEqual:mailTf])
- {
- //move the main view, so that the keyboard does not hide it.
- if  (self.view.frame.origin.y >= 0)
- {
- [self setViewMovedUp:YES];
- }
- }
- }
- */
+-(void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    if ([sender isEqual:mailTf])
+    {
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+*/
+- (void) registerForKeyboardNotification {
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void) deregisterForKeyboardNotification {
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+
+    
+}
 
 #pragma mark - UIBarBatton
 
@@ -144,17 +176,17 @@ UINavigationControllerDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Back Button Item//
+       //Back Button Item//
     
     self.navigationItem.hidesBackButton = YES;
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                      style:UIBarButtonItemStylePlain
-                                                                     target:self
-                                                                     action:@selector(back:)];
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Back"
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(back:)];
     
     self.navigationItem.leftBarButtonItem = newBackButton;//Back Button Item
-    //
     
     // Підєднання комірок
     
@@ -170,13 +202,16 @@ UINavigationControllerDelegate>
     [[self tableView] registerNib:nibPrimaryConactCell
            forCellReuseIdentifier:primaryContactCellIdentifier];
     /////////////
-    UINib * nibSecondaryContactCell = [UINib
+    /*UINib * nibSecondaryContactCell = [UINib
                                        nibWithNibName:@"SecondaryContactCell"
                                        bundle:nil];
+    
     [[self tableView] registerNib:nibSecondaryContactCell
            forCellReuseIdentifier:secondCellIdentifier];
+    */
     
     // перевіряє чи слід створювати новий контакт чи використовувати існуючий
+    
     
     if (self.contact) {
         
@@ -205,38 +240,20 @@ UINavigationControllerDelegate>
     
     [self createRightBarButtonItem];    //create rightBarButtonItem
     
+    
     self.automaticallyAdjustsScrollViewInsets = false;
     
-   
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    [self registerForKeyboardNotification];
     [super viewWillAppear:animated];
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    // unregister for keyboard notifications while not visible.
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+    [self deregisterForKeyboardNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -253,7 +270,7 @@ UINavigationControllerDelegate>
         
     } else {//if (indexPath.row == 1) {
         
-        return 163.0;
+        return 160.0;
         
     }/* else {
       
@@ -336,7 +353,6 @@ UINavigationControllerDelegate>
     [self.view endEditing:YES] ;
 }
 
-
 # pragma mark - Action
 
 - (IBAction)saveButton:(id)sender {
@@ -367,7 +383,7 @@ UINavigationControllerDelegate>
         [alert show];
         [self.navigationController popViewControllerAnimated:YES];
         
-        NSLog(@"Save ERROR %@, %@", error, [error localizedDescription]);
+        //NSLog(@"Save ERROR %@, %@", error, [error localizedDescription]);
         
     } else {
        
@@ -423,7 +439,6 @@ UINavigationControllerDelegate>
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *  action) {
                                        
-                                       
                                        return ;
                                        
                                    }];
@@ -432,7 +447,9 @@ UINavigationControllerDelegate>
     [saveAlert addAction:actionCancel];
     
     
-    [self presentViewController:saveAlert animated:YES completion:nil];
+    [self presentViewController:saveAlert
+                       animated:YES
+                     completion:nil];
     
 }
 
@@ -448,13 +465,8 @@ UINavigationControllerDelegate>
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *action) {
                                        
-                                       //создеме UIImagePickerController для камеры
-                                       
-                                       
-                                       //NSLog(@"camera");
-                                       
-                                       
-                                       UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                                       UIImagePickerController *imagePicker =
+                                       [[UIImagePickerController alloc] init];
                                        
                                        imagePicker.delegate = self;
                                        
@@ -465,7 +477,9 @@ UINavigationControllerDelegate>
                                        
                                        imagePicker.allowsEditing = YES;
                                        
-                                       [self presentViewController:imagePicker animated:YES completion:nil];
+                                       [self presentViewController:imagePicker
+                                                          animated:YES
+                                                        completion:nil];
                                        
                                    }];
     
@@ -474,9 +488,10 @@ UINavigationControllerDelegate>
                                        style:UIAlertActionStyleDefault
                                        handler:^(UIAlertAction *action) {
                                            
-                                           //создеме UIImagePickerController для фотоальбома
+                                           //создаем UIImagePickerController для фотоальбома
                                            
-                                           UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                                           UIImagePickerController *imagePicker =
+                                           [[UIImagePickerController alloc] init];
                                            
                                            imagePicker.modalPresentationStyle = UIModalPresentationPopover;
                                            
@@ -489,12 +504,9 @@ UINavigationControllerDelegate>
                                            imagePicker.allowsEditing = YES;
                                            
                                            
-                                           
-                                           [self presentViewController:imagePicker animated:YES completion:nil];
-                                           
-                                           //NSLog(@"%@", imagePicker);
-                                           
-                                           
+                                           [self presentViewController:imagePicker
+                                                              animated:YES
+                                                            completion:nil];
                                            
                                        }];
     
@@ -502,7 +514,6 @@ UINavigationControllerDelegate>
                                    actionWithTitle:@"Cancel"
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *  action) {
-                                       
                                        
                                        [self deleteTag:tempTagForImageButton];
                                        
@@ -512,9 +523,9 @@ UINavigationControllerDelegate>
     [alert addAction:actionDirectiory];
     [alert addAction:actionCancel];
     
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
     
 }
 
@@ -554,7 +565,9 @@ UINavigationControllerDelegate>
     [alert addAction:actionCancel];
     [alert addAction:actionSave];
     
-    [self presentViewController:alert animated:YES completion:nil];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
     
 }
 
@@ -564,6 +577,7 @@ UINavigationControllerDelegate>
     
     return NO;
 }
+
 #pragma mark - imagesCartTableViewCellDelegate
 
 - (void) imagesCartTableViewCell:(NSInteger)tag {
@@ -572,16 +586,19 @@ UINavigationControllerDelegate>
     
     if (screenType == reviewContact) {
         
-        if (tag == 2001 && self.contact.kardPhotoFront != nil) {
+        if (tag == LEFT_IMAGE_BUTTON_TAG && self.contact.kardPhotoFront != nil) {
             [self createImageView];
             return;
         }
-        if (tag == 2002 && self.contact.kardPhotoBack != nil) {
+        if (tag == RIGHT_IMAGE_BUTTON_TAG && self.contact.kardPhotoBack != nil) {
             [self createImageView];
             
             return;
             
         } else {
+            screenType = editContact;
+            [self createRightBarButtonItem];
+
             
             [self actionSheet];
         }
@@ -604,7 +621,10 @@ UINavigationControllerDelegate>
     
     UIImage* image;
     
-    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    NSString *stringPath = [[NSSearchPathForDirectoriesInDomains
+                             (NSDocumentDirectory, NSUserDomainMask, YES)
+                             objectAtIndex:0]
+                            stringByAppendingPathComponent:@"Images"];
     
     NSString* fullFileName1;
     
@@ -612,7 +632,9 @@ UINavigationControllerDelegate>
     
     if (tempTagForImageButton == LEFT_IMAGE_BUTTON_TAG) {
         
-        fullFileName1 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+        fullFileName1 = [stringPath stringByAppendingString:
+                         [NSString stringWithFormat:@"/%@",self.contact.kardPhotoFront]];
+        
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName1]) {
             
             image = [UIImage imageWithContentsOfFile:fullFileName1];
@@ -620,12 +642,13 @@ UINavigationControllerDelegate>
         
     } else if (tempTagForImageButton == RIGHT_IMAGE_BUTTON_TAG) {
         
-        fullFileName2 = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",self.contact.kardPhotoBack]];
+        fullFileName2 = [stringPath stringByAppendingString:
+                         [NSString stringWithFormat:@"/%@",self.contact.kardPhotoBack]];
+        
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullFileName2]) {
             
             image = [UIImage imageWithContentsOfFile:fullFileName2];
         }
-        
     }
     
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
@@ -646,7 +669,6 @@ UINavigationControllerDelegate>
     
     [window addSubview:imageView];
     
-    //window.translatesAutoresizingMaskIntoConstraints = NO;
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [window addConstraint:
@@ -696,8 +718,8 @@ UINavigationControllerDelegate>
 
 #pragma mark - UIImagePickerControllerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     
@@ -707,7 +729,9 @@ UINavigationControllerDelegate>
         
         image = [info valueForKey:@"UIImagePickerControllerOriginalImage"];
         
-        NSString *stringPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+        NSString *stringPath = [[NSSearchPathForDirectoriesInDomains
+                                 (NSDocumentDirectory, NSUserDomainMask, YES)
+                                 objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
         
         // New Folder is your folder name
         
@@ -715,7 +739,10 @@ UINavigationControllerDelegate>
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:stringPath]) {
             
-            [[NSFileManager defaultManager] createDirectoryAtPath:stringPath withIntermediateDirectories:NO attributes:nil error:&error];
+            [[NSFileManager defaultManager] createDirectoryAtPath:stringPath
+                                      withIntermediateDirectories:NO
+                                                       attributes:nil
+                                                            error:&error];
         }
         
         NSDate *today = [NSDate date];
@@ -728,9 +755,10 @@ UINavigationControllerDelegate>
         
         NSString *fileName = [NSString stringWithFormat:@"%@.png", dateString];
         
-        NSString *fullFileName = [stringPath stringByAppendingString:[NSString stringWithFormat:@"/%@",fileName]];
+        NSString *fullFileName = [stringPath stringByAppendingString:
+                                  [NSString stringWithFormat:@"/%@",fileName]];
         
-        NSData *data =  UIImagePNGRepresentation(image);//UIImagePNGRepresentation(image, 1.0);
+        NSData *data =  UIImagePNGRepresentation(image);
         
         [data writeToFile:fullFileName atomically:YES];
         
@@ -747,9 +775,9 @@ UINavigationControllerDelegate>
         
         [self.tableView reloadData];
         
-        NSLog(@"файл зображення %@", stringPath);
+        //NSLog(@"файл зображення %@", stringPath);
         
-        NSLog(@"%@", self.tmpContact.kardPhotoFront);
+        //NSLog(@"%@", self.tmpContact.kardPhotoFront);
     }
 }
 
@@ -757,7 +785,7 @@ UINavigationControllerDelegate>
     
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    NSLog(@"%@", picker);
+    //NSLog(@"%@", picker);
 }
 
 @end

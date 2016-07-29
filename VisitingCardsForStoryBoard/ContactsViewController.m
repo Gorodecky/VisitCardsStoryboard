@@ -9,7 +9,7 @@
 #import "ContactsViewController.h"
 #import "CreateContactViewController.h"
 #import "ContactCustomTableViewCell.h"
-#import "Section.h"
+//#import "Section.h"
 #import "Utilite.h"
 
 
@@ -107,7 +107,7 @@ typedef enum {
     self.groupsArray = [[managedObjectContext executeFetchRequest:fetchRequest
                                                             error:nil]mutableCopy];
     [self showAddContactView];
-
+    
     [self.tableView reloadData];
     
 }
@@ -132,7 +132,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         NSError *error = nil;
         
         if (![context save:&error]) {
-            NSLog(@"Delete error! %@, %@", error, [error localizedDescription]);
+            //NSLog(@"Delete error! %@, %@", error, [error localizedDescription]);
             return;
         }
         
@@ -140,8 +140,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
         
-        
-
     } else {
         
         [context deleteObject:[self.searchResults objectAtIndex:indexPath.row]];
@@ -149,14 +147,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         NSError *error = nil;
         
         if (![context save:&error]) {
-            NSLog(@"Delete error! %@, %@", error, [error localizedDescription]);
+            //NSLog(@"Delete error! %@, %@", error, [error localizedDescription]);
             return;
         }
         
         [self.searchResults removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
-
+        
     }
     
     [self.tableView reloadData];
@@ -178,8 +176,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.serchContactBar setText:nil];
     
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    
     self.tableView.hidden = NO;
-
     
     [self.tableView reloadData];
 }
@@ -221,12 +221,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSError *error;
     
-    NSArray* result = [[Utilite managedObjectContext] executeFetchRequest:fetchRequest
-                                                                    error:&error];
+    NSArray* result= [[Utilite managedObjectContext]
+                      executeFetchRequest:fetchRequest
+                                    error:&error];
     
     self.searchResults = [result mutableCopy];
-    
-    
     
 }
 
@@ -237,36 +236,18 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         //[self showViewNoResultsFound];
         
     } else if (self.searchResults.count != 0 && self.serchContactBar.text.length != 0){
-    
-    
-    self.tableView.hidden = NO;
-    [self.tableView reloadData];
+        
+        
+        self.tableView.hidden = NO;
+        [self.tableView reloadData];
         
     } else {
         
         self.tableView.hidden = NO;
         [self.tableView reloadData];
-
+        
     }
 }
-/*
-- (void) showViewNoResultsFound {
-    
-    
-    UIView* noResultsView = [[UIView alloc]
-                             initWithFrame:
-                             CGRectMake
-                             (8, 138,
-                              self.tableView.frame.size.width,
-                              self.tableView.frame.size.height)];
-    
-    [noResultsView setBackgroundColor:[UIColor redColor]];
-    
-    [self.view addSubview:noResultsView];
-    
-    
-}*/
-
 
 #pragma mark - UITableViewDataSource
 
@@ -295,15 +276,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                                                        reuseIdentifier:identifier];
     }
     
-    //NSManagedObject* contact = nil;
-    
     if (self.serchContactBar.text.length == 0) {
         
         customCell.contact = [self.groupsArray objectAtIndex:indexPath.row];
         
-        
         [customCell updateCustomCell];
-        
         
         return customCell;
         
@@ -311,13 +288,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         
         customCell.contact = [self.searchResults objectAtIndex:indexPath.row];
         
-        
         [customCell updateCustomCell];
-        
         
         return customCell;
     }
-    
     
 }
 
@@ -325,12 +299,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([[segue identifier] isEqualToString:@"updateContact"]) {
         
-        NSManagedObject* selectedContact = [self.groupsArray
-                                            objectAtIndex:[[self.tableView indexPathForSelectedRow]row]];
+        Contact* selectedContact;
         
-        CreateContactViewController* destViewController = segue.destinationViewController;
+        if (self.searchResults.count == 0) {
+            
+            selectedContact = [self.groupsArray objectAtIndex:[[self.tableView indexPathForSelectedRow]row]];
+            
+        } else {
+            
+            selectedContact = [self.searchResults objectAtIndex:[[self.tableView indexPathForSelectedRow]row]];
+
+        }
+        
+        CreateContactViewController* destViewController =
+        segue.destinationViewController;
         
         destViewController.contact = selectedContact;
     }
+    
+         [self searchBarCancelButtonClicked:nil];
+    
+    
+   
 }
 @end

@@ -83,7 +83,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
    
-    NSLog(@"%u", self.viewType);
+    //NSLog(@"%u", self.viewType);
 
     
     if (self.viewType == reviewContact) {

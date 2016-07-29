@@ -81,7 +81,7 @@
     
     [self.delegate imagesCartTableViewCell:button.tag];
     
-    NSLog(@"%@", sender);
+    //NSLog(@"%@", sender);
     
 }
 @end
