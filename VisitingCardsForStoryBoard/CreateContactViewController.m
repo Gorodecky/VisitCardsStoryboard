@@ -21,10 +21,12 @@ UITableViewDelegate,
 UIActionSheetDelegate,
 UITextFieldDelegate,
 ImageButtonDelegate,
+ChangesStatusTextField,
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate>
 
 {
+    UITextField* activeField;
     
     UIImage* tempImageFirst;
     UIImage* tempImageSecond;
@@ -32,7 +34,9 @@ UINavigationControllerDelegate>
     NSInteger tempTagForImageButton;
     
     StatusViewType screenType;
-}
+    
+    
+    }
 
 @property (strong, nonatomic) Contact* tmpContact;
 
@@ -49,91 +53,95 @@ UINavigationControllerDelegate>
 
 #pragma mark - keyboard textField
 
--(void)keyboardWillShow:(NSNotification*) notificstion {
-    
-    // Animate the current view out of the way
-    if (self.view.frame.origin.y >= 0) {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0) {
-        [self setViewMovedUp:NO];
-    }
-}
-
-
-- (void) keyboardWillHide:(NSNotification*)notification {
-    
-    
-    NSLog(@"%@",notification);
-    if (self.view.frame.origin.y >= 0) {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0) {
-        [self setViewMovedUp:NO];
-    }
-}
-
-- (void)setViewMovedUp:(BOOL)movedUp {
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
-    CGRect rect = self.view.frame;
-    
-        
-    
-    if (movedUp) {
-        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
-        // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-    } else {
-        // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-    }
-    
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
-}
-/*
--(void)textFieldDidBeginEditing:(UITextField *)sender
+- (void)registerForKeyboardNotifications
 {
-    if ([sender isEqual:mailTf])
-    {
-        //move the main view, so that the keyboard does not hide it.
-        if  (self.view.frame.origin.y >= 0)
-        {
-            [self setViewMovedUp:YES];
-        }
-    }
-}
-*/
-- (void) registerForKeyboardNotification {
-    // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
+                                             selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
 }
 
-- (void) deregisterForKeyboardNotification {
-    // unregister for keyboard notifications while not visible.
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+// Called when the UIKeyboardDidShowNotification is sent.
 
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+  
+    NSDictionary* info = [aNotification userInfo];
     
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    
+    self.tableView.contentInset = contentInsets;
+    //self.tableView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        
+        [self.tableView scrollRectToVisible:activeField.frame animated:YES];
+    }
+    
+    
+    /*
+    CGRect keyboardBounds;
+    [[aNotification.userInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] getValue: &keyboardBounds];
+    
+    // Detect orientation
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    CGRect frame = self.tableView.frame;
+    
+    // Start animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];
+    
+    // Reduce size of the Table view
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown)
+        frame.size.height -= keyboardBounds.size.height;
+    else
+        frame.size.height -= keyboardBounds.size.width;
+    
+    // Apply new size of table view
+    self.tableView.frame = frame;
+    
+    // Scroll the table view to see the TextField just above the keyboard
+    if (activeField)
+    {
+        CGRect textFieldRect = [self.tableView convertRect:activeField.bounds fromView:self.tableView];
+        [self.tableView scrollRectToVisible:textFieldRect animated:NO];
+    }
+    
+    [UIView commitAnimations];*/
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+    
+}
+
+- (void) keyboardIsSow:(UITextField *)tf {
+    
+    if (tf) {
+        activeField = tf;
+        
+    } else {
+        
+        activeField = nil;
+    }
 }
 
 #pragma mark - UIBarBatton
@@ -177,6 +185,9 @@ UINavigationControllerDelegate>
     [super viewDidLoad];
     
        //Back Button Item//
+    
+    activeField = nil;
+
     
     self.navigationItem.hidesBackButton = YES;
     
@@ -246,14 +257,24 @@ UINavigationControllerDelegate>
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self registerForKeyboardNotification];
+    [self registerForKeyboardNotifications];
     [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self deregisterForKeyboardNotification];
+    //[self deregisterForKeyboardNotification];
+}
+
+- (void) deregisterForKeyboardNotification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -318,6 +339,8 @@ UINavigationControllerDelegate>
         cell.contact = self.tmpContact;
         cell.viewType = screenType;
         [cell updateUI];
+        
+        cell.delegate = self;
         
         return cell;
     }
@@ -429,7 +452,9 @@ UINavigationControllerDelegate>
                                     message:@"Saved contact?"
                                     preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction* actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction *action) {
         
         [self.navigationController popViewControllerAnimated:YES];
     }];

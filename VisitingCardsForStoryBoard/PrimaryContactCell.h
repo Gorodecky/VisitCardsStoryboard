@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Utilite.h"
 
-#define kOFFSET_FOR_KEYBOARD 80.0
+@protocol ChangesStatusTextField <NSObject>
+
+- (void) keyboardIsSow: (UITextField*) tf;
+
+@end
+
+//#define kOFFSET_FOR_KEYBOARD 80.0
 
 @class Contact;
 
@@ -24,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+
+@property (weak, nonatomic) id <ChangesStatusTextField> delegate;
 
 - (void) updateUI;
 

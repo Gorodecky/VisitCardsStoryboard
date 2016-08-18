@@ -16,6 +16,9 @@
 @implementation PrimaryContactCell
 
 - (void)awakeFromNib {
+    
+    
+    
     // Initialization code
     _nameTextField.delegate =
     _lastNameTextField.delegate =
@@ -108,6 +111,19 @@
     return NO;
 }
 #pragma mark - keyboard
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    //activeField = textField;
+    
+    [self.delegate keyboardIsSow:textField];
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    //activeField = nil;
+    [self.delegate keyboardIsSow:textField];
+
+    
+}
 
 
 @end
