@@ -71,7 +71,7 @@ UINavigationControllerDelegate>
 
 
 - (void)keyboardWasShown:(NSNotification*)aNotification {
-  
+  /*
     NSDictionary* info = [aNotification userInfo];
     
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -90,7 +90,7 @@ UINavigationControllerDelegate>
         
         [self.tableView scrollRectToVisible:activeField.frame animated:YES];
     }
-    
+    */
     
     /*
     CGRect keyboardBounds;
@@ -122,6 +122,14 @@ UINavigationControllerDelegate>
     }
     
     [UIView commitAnimations];*/
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
