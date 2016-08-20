@@ -35,6 +35,7 @@
 		D5F9FABB1C973FAC00A0760F /* Settings-50@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F9FABA1C973FAC00A0760F /* Settings-50@1x.png */; };
 		D5F9FABD1C973FC200A0760F /* Settings-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F9FABC1C973FC200A0760F /* Settings-50@2x.png */; };
 		D5F9FAC01C975E1200A0760F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F9FABF1C975E1200A0760F /* Contact.m */; };
+		FE1C774A1D68561E007A42C0 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = FE1C77491D68561E007A42C0 /* Icons */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		D5F9FABC1C973FC200A0760F /* Settings-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-50@2x.png"; sourceTree = "<group>"; };
 		D5F9FABE1C975E1200A0760F /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		D5F9FABF1C975E1200A0760F /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		FE1C77491D68561E007A42C0 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 		D5F9FAA31C96F90E00A0760F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FE1C77491D68561E007A42C0 /* Icons */,
 				D54AC90F1D47888B004DDA6E /* No-results-found.jpg */,
 				D57364EB1D4661AF00D4D949 /* placeholder.png */,
 				D5F9FABC1C973FC200A0760F /* Settings-50@2x.png */,
@@ -324,6 +327,7 @@
 				D5F9FAB71C973F7400A0760F /* Contact Card-50@1x.png in Resources */,
 				D5F9FABD1C973FC200A0760F /* Settings-50@2x.png in Resources */,
 				D5C145051CEE5104006099AD /* PrimaryContactCell.xib in Resources */,
+				FE1C774A1D68561E007A42C0 /* Icons in Resources */,
 				D54AC9101D47888B004DDA6E /* No-results-found.jpg in Resources */,
 				D5F9FAB51C973E1A00A0760F /* Camera-50@2x.png in Resources */,
 			);
